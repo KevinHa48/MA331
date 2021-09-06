@@ -1,0 +1,131 @@
+---
+title: '**Homework 1**'
+author: "Kevin Ha"
+date: "September 2nd, 2021"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+---
+
+### **Problem 1**
+
+##### *Problem 1.1*
+```{r echo=FALSE, hist-side, fig.show="hold", out.width="50%"}
+x = c(0.2, 1.2, 0.9, 2.2, 3.2, 0.3, 1.7, 3.1, 2.3, 1.5, 2.5, 3.0, 2.6, 9.0)   
+hist(x)
+   
+y = c(1.1, 2.3, 1.1, 3.6, 0.1, 1.0, 6.9, 4.8, 6.5, 7.8, 5.8, 8.0, 9.4, 9.8)   
+hist(y) 
+```
+
+##### *Problem 1.2*
+```{r}
+summary(x)
+var(x)
+summary(y)
+var(y)
+```
+
+```{r echo=FALSE, box-side, fig.show="hold", out.width="50%"}
+boxplot(x, main="Boxplot of x", horizontal=TRUE, sub = "The only outlier is 9")
+boxplot(y, main="Boxplot of y", horizontal=TRUE, sub = "There are no outliers")
+```
+\
+
+##### *Problem 1.3*
+```{r echo=FALSE, fig.align='center', out.width="50%"}
+plot(x,y)
+```
+```{r}
+cor(x,y)
+```
+
+
+<center>**The correlation coefficient presents that there is neither a weak or strong linear association between $x_i$ and $y_i$**</center>
+\
+
+##### *Problem 1.4*
+Yes, the outlier is the pair **(9.0, 9.8)** since the first coordinator (x) was previously identified as an outlier for all $x_i$'s.
+
+Removing the pair produces the following correlation coefficient:
+```{r echo=FALSE}
+a = c(0.2, 1.2, 0.9, 2.2, 3.2, 0.3, 1.7, 3.1, 2.3, 1.5, 2.5, 3.0, 2.6)   
+b = c(1.1, 2.3, 1.1, 3.6, 0.1, 1.0, 6.9, 4.8, 6.5, 7.8, 5.8, 8.0, 9.4)
+
+cor(a,b)
+```
+\
+
+##### *Problem 1.5*
+Upon removing the outlier in Problem 1.4, the correlation coefficient decreased and **weakened** the linear association between $x_i$ and $y_i$.
+
+\
+
+##### *Problem 1.6*
+```{r echo=FALSE, qq-side, fig.show="hold", out.width="50%"}
+qqnorm(x, main="Normal QQ Plot for x"); qqline(x)
+qqnorm(y, main="Normal QQ Plot for y"); qqline(y)
+```
+<center>**The QQ plot of $x_i$'s is most likely of normal distribution as there is minimal deviation from the straight diagonal line in contrast to the plot of $y_i$'s**</center>
+
+### Problem 2
+Given that $F$ is the cdf for the random variable $X$, $F^{-1}(\alpha)$ is the inverse cdf or quantile function which determines the x value that is needed to achieve the probability $\alpha$.
+With this in mind, the following probabilities can be determined:
+
+$P(X \leq F^{-1}(\alpha/2)) = \alpha/2$ \
+$P(X \leq F^{-1}(1-\alpha/2)) = 1 - \alpha/2$ \
+$P(F^{-1}(\alpha/2) \leq X \leq F^{-1}(1 - \alpha/2)) = (1 - \alpha/2 - \alpha/2) = 1 - \frac{2\alpha}{2} = 1 - \alpha$ \
+
+Given that $X \sim N(0,1)$ this establishes that X is normally distributed with a $\mu = 0$ and $\sigma = 1$, which is a standard normal distribution.
+
+To calculate the following `qnorm()` will be used with $\mu = 0$ and $\sigma = 1$
+
+\
+
+$P (X \leq z_{0.05})$, given $\alpha = 0.05$, the z-score $1-\alpha$ needs to be found.
+
+```{r}
+qnorm(1-0.05, 0, 1)
+```
+
+$P (X \leq z_{0.05}) = P(Z \leq 1.644854) = 0.95$
+
+\
+
+$P (X \leq z_{1-0.05/2})$, given $\alpha = 1-0.05/2$, the z-score $1-\alpha$ needs to be found.
+
+```{r}
+qnorm(1-0.975, 0, 1)
+```
+$P (X \leq z_{1-0.05/2}) = P(Z \leq -1.959964) = 0.025$
+
+\
+
+$P (z_{0.05/2} \leq X \leq z_{1-0.05/2})$
+
+$P (z_{0.05/2})$ given $\alpha = 0.05/2$, the z-score $1-\alpha$ needs to be found.
+```{r}
+qnorm(1- 0.025, 0, 1)
+```
+$P (X \leq z_{1-0.05/2}) = P(Z \leq 1.959964) = 0.975$
+
+\
+
+$P (z_{0.05/2} \leq X \leq z_{1-0.05/2}) = 0.975 - 0.025 = 0.95$
+
+
+### Problem 3
+
+Verify using algebraic manipulation: 
+$$ \frac{1}{n} \sum_{i=1}^{n} (x_i - \overline{x})^2 = \frac{1}{n} \sum_{i=1}^{n} x_i^2 - \overline{x}^2$$ 
+1. Expand out $\frac{1}{n} \sum_{i=1}^{n} (x_i - \overline{x})^2$ to $\frac{1}{n} \sum_{i=1}^{n} (x_i^2 - 2x_i\overline{x} + \overline{x})$ \
+2. $\frac{1}{n} \sum_{i=1}^{n} (x_i^2 - 2x_i\mu + \overline{x})$ is equivalent to $\frac{\sum_{i=1}^{n} x_i^2 - 2\overline{x}\sum_{i=1}^{n} x_i + \overline{x}^2 \sum_{i=1}^{n} 1} {n}$ \
+3. $\sum_{i=1}^{n} 1$ is the same as adding 1, $n$ times and can be reduced to just $n$.  \
+4. Simplified more: $\frac{\sum_{i=1}^{n} x_i^2}{n} - \frac{2\overline{x}\sum_{i=1}^{n} x_i}{n} + \frac{\overline{x}^2 n}{n}$ \
+5. $\frac{\sum_{i=1}^{n} x_i}{n}$ is the population mean and can be reduced to just $\overline{x}$ \
+6. Lastly, the simplifications result in: $\frac{\sum_{i=1}^{n} x_i^2}{n} - 2\overline{x}^2 + \overline{x}^2 = \frac{1}{n}{\sum_{i=1}^{n} x_i^2} - \overline{x}^2$, verifying equivalency.
+
+
