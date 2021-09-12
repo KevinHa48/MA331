@@ -81,36 +81,40 @@ $P(F^{-1}(\alpha/2) \leq X \leq F^{-1}(1 - \alpha/2)) = (1 - \alpha/2 - \alpha/2
 
 Given that $X \sim N(0,1)$ this establishes that X is normally distributed with a $\mu = 0$ and $\sigma = 1$, which is a standard normal distribution.
 
-To calculate the following `qnorm()` will be used with $\mu = 0$ and $\sigma = 1$
+To calculate the following `qnorm()` and `pnorm()` will be used with $\mu = 0$ and $\sigma = 1$
 
 \
 
-$P (X \leq z_{0.05})$, given $\alpha = 0.05$, the z-score $1-\alpha$ needs to be found.
+$P (X \leq z_{0.05})$
 
 ```{r}
-qnorm(1-0.05, 0, 1)
+pnorm(qnorm(0.05, 0, 1))
+
 ```
 
-$P (X \leq z_{0.05}) = P(Z \leq 1.644854) = 0.95$
+$P (X \leq z_{0.05}) = 0.05$
 
 \
 
-$P (X \leq z_{1-0.05/2})$, given $\alpha = 1-0.05/2$, the z-score $1-\alpha$ needs to be found.
+$P (X \leq z_{1-0.05/2})$
 
 ```{r}
-qnorm(1-0.975, 0, 1)
+pnorm(qnorm(1-0.025, 0, 1))
+
 ```
-$P (X \leq z_{1-0.05/2}) = P(Z \leq -1.959964) = 0.025$
+$P (X \leq z_{1-0.05/2}) = 0.975$
 
 \
 
 $P (z_{0.05/2} \leq X \leq z_{1-0.05/2})$
 
-$P (z_{0.05/2})$ given $\alpha = 0.05/2$, the z-score $1-\alpha$ needs to be found.
+\
+
+$P (X \leq z_{0.05/2})$
 ```{r}
-qnorm(1- 0.025, 0, 1)
+pnorm(qnorm(0.05/2, 0, 1))
+
 ```
-$P (X \leq z_{1-0.05/2}) = P(Z \leq 1.959964) = 0.975$
 
 \
 
@@ -125,7 +129,7 @@ $$ \frac{1}{n} \sum_{i=1}^{n} (x_i - \overline{x})^2 = \frac{1}{n} \sum_{i=1}^{n
 2. $\frac{1}{n} \sum_{i=1}^{n} (x_i^2 - 2x_i\mu + \overline{x})$ is equivalent to $\frac{\sum_{i=1}^{n} x_i^2 - 2\overline{x}\sum_{i=1}^{n} x_i + \overline{x}^2 \sum_{i=1}^{n} 1} {n}$ \
 3. $\sum_{i=1}^{n} 1$ is the same as adding 1, $n$ times and can be reduced to just $n$.  \
 4. Simplified more: $\frac{\sum_{i=1}^{n} x_i^2}{n} - \frac{2\overline{x}\sum_{i=1}^{n} x_i}{n} + \frac{\overline{x}^2 n}{n}$ \
-5. $\frac{\sum_{i=1}^{n} x_i}{n}$ is the population mean and can be reduced to just $\overline{x}$ \
+5. $\frac{\sum_{i=1}^{n} x_i}{n}$ is the sample mean and can be rewritten $\overline{x}$ \
 6. Lastly, the simplifications result in: $\frac{\sum_{i=1}^{n} x_i^2}{n} - 2\overline{x}^2 + \overline{x}^2 = \frac{1}{n}{\sum_{i=1}^{n} x_i^2} - \overline{x}^2$, verifying equivalency.
 
 
