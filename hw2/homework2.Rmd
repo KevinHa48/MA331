@@ -69,4 +69,47 @@ Thus the larger the trials, the better the normal distribution can be used to ap
 ### **Problem 2**
 
 
+### **Problem 3**
+A binomial distribution can be interpreted alternatively as the sum of $n$ Bernoulli random variables. Each Bernoulli random variable has a mean defined as $p$.
+Using this fact, we can state that $Y_1, ..., Y_n$ to be a series of independent Bernoulli random variables with $E(Y_i) = p$
+
+Since the random binomial random variable, $N$ is the sum of these, it can be said that:
+
+$N = Y_1 + ... + Y_n$
+
+To find the expected value of $N$, the expected value of the sum of all Bernoulli random variables must be derived:
+
+$E(N) = E(Y_1 + ... + Y_n)$
+
+However, using the property of expectations $E[X + Y] = E[X] + E[Y]$, the above can be changed to:
+
+$E(N) = E(Y_1) + ... +  E(Y_n)$
+
+Since all the expected values of each Bernoulli random variable is $p$, the equation above is the same as adding $p$ for $n$ times.
+
+$E(N) = p + ... + p = np$
+
+\
+
+### **Problem 4**
+```{r, echo = FALSE}
+density_of_t <- "$\\frac{\\Gamma (\\frac{n+1}{2})}{\\sqrt{n\\pi}\\Gamma (\\frac{n+1}{2})}(1+\\frac{x^2}{n})^{-(\\frac{n+1}{2})}$"
+```
+
+Given that $T \sim \tau_n$, we know that the random variable $T$ has a t-distribution and is thus also a continuous random variable.
+
+To find the expected value of a continous random variable, the following formula will be used: $E[X] = \int_{-\infty}^{\infty} x * f(x) \,dx$
+
+and $f(x)$ will be the probability density function of $T$: $f(x) =$ `r density_of_t`
+
+So, $E[X] = \int_{-\infty}^{\infty} x *$ `r density_of_t` $\,dx$
+
+Simplifying further, $E[X] = \frac{\Gamma (\frac{n+1}{2})}{\sqrt{n\pi}\Gamma (\frac{n+1}{2})}$ $\int_{-\infty}^{\infty} x * (1+\frac{x^2}{n})^{-(\frac{n+1}{2})}$  
+
+Note that the function $f(x) = x * (1+\frac{x^2}{n})^{-(\frac{n+1}{2})}$ is an odd function since $-f(x) = f(-x)$
+
+When taking the integral of an odd function, the result will always be 0.
+
+Thus, $E[X] = \frac{\Gamma (\frac{n+1}{2})}{\sqrt{n\pi}\Gamma (\frac{n+1}{2})} * 0 = 0$
+
 

@@ -230,6 +230,31 @@ error_vector</code></pre>
 <div id="problem-2" class="section level3">
 <h3><strong>Problem 2</strong></h3>
 </div>
+<div id="problem-3" class="section level3">
+<h3><strong>Problem 3</strong></h3>
+<p>A binomial distribution can be interpreted alternatively as the sum of <span class="math inline">\(n\)</span> Bernoulli random variables. Each Bernoulli random variable has a mean defined as <span class="math inline">\(p\)</span>. Using this fact, we can state that <span class="math inline">\(Y_1, ..., Y_n\)</span> to be a series of independent Bernoulli random variables with <span class="math inline">\(E(Y_i) = p\)</span></p>
+<p>Since the random binomial random variable, <span class="math inline">\(N\)</span> is the sum of these, it can be said that:</p>
+<p><span class="math inline">\(N = Y_1 + ... + Y_n\)</span></p>
+<p>To find the expected value of <span class="math inline">\(N\)</span>, the expected value of the sum of all Bernoulli random variables must be derived:</p>
+<p><span class="math inline">\(E(N) = E(Y_1 + ... + Y_n)\)</span></p>
+<p>However, using the property of expectations <span class="math inline">\(E[X + Y] = E[X] + E[Y]\)</span>, the above can be changed to:</p>
+<p><span class="math inline">\(E(N) = E(Y_1) + ... + E(Y_n)\)</span></p>
+<p>Since all the expected values of each Bernoulli random variable is <span class="math inline">\(p\)</span>, the equation above is the same as adding <span class="math inline">\(p\)</span> for <span class="math inline">\(n\)</span> times.</p>
+<p><span class="math inline">\(E(N) = p + ... + p = np\)</span></p>
+<p><br />
+</p>
+</div>
+<div id="problem-4" class="section level3">
+<h3><strong>Problem 4</strong></h3>
+<p>Given that <span class="math inline">\(T \sim \tau_n\)</span>, we know that the random variable <span class="math inline">\(T\)</span> has a t-distribution and is thus also a continuous random variable.</p>
+<p>To find the expected value of a continous random variable, the following formula will be used: <span class="math inline">\(E[X] = \int_{-\infty}^{\infty} x * f(x) \,dx\)</span></p>
+<p>and <span class="math inline">\(f(x)\)</span> will be the probability density function of <span class="math inline">\(T\)</span>: <span class="math inline">\(f(x) =\)</span> <span class="math inline">\(\frac{\Gamma (\frac{n+1}{2})}{\sqrt{n\pi}\Gamma (\frac{n+1}{2})}(1+\frac{x^2}{n})^{-(\frac{n+1}{2})}\)</span></p>
+<p>So, <span class="math inline">\(E[X] = \int_{-\infty}^{\infty} x *\)</span> <span class="math inline">\(\frac{\Gamma (\frac{n+1}{2})}{\sqrt{n\pi}\Gamma (\frac{n+1}{2})}(1+\frac{x^2}{n})^{-(\frac{n+1}{2})}\)</span> <span class="math inline">\(\,dx\)</span></p>
+<p>Simplifying further, <span class="math inline">\(E[X] = \frac{\Gamma (\frac{n+1}{2})}{\sqrt{n\pi}\Gamma (\frac{n+1}{2})}\)</span> <span class="math inline">\(\int_{-\infty}^{\infty} x * (1+\frac{x^2}{n})^{-(\frac{n+1}{2})}\)</span></p>
+<p>Note that the function <span class="math inline">\(f(x) = x * (1+\frac{x^2}{n})^{-(\frac{n+1}{2})}\)</span> is an odd function since <span class="math inline">\(-f(x) = f(-x)\)</span></p>
+<p>When taking the integral of an odd function, the result will always be 0.</p>
+<p>Thus, <span class="math inline">\(E[X] = \frac{\Gamma (\frac{n+1}{2})}{\sqrt{n\pi}\Gamma (\frac{n+1}{2})} * 0 = 0\)</span></p>
+</div>
 
 
 
