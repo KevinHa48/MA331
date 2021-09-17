@@ -68,6 +68,73 @@ Thus the larger the trials, the better the normal distribution can be used to ap
 
 ### **Problem 2**
 
+```{r, echo = FALSE}
+sample_sim <- function(size_of_sample, number_of_samples) {
+  sam = c()
+  sav = c()
+  
+  for(i in 1:number_of_samples) {
+    x = rnorm(size_of_sample, 2, 3)
+    sam = c(sam, mean(x))
+    sav = c(sav, var(x))
+  }
+  
+  samn = (sam - 2) / sqrt(3^2 / size_of_sample)
+  savn = (size_of_sample - 1) * sav / (3 ^ 2)
+  plot(density(samn), main = "Density of sample mean")
+  plot(density(savn), main = "Density of sample variance")
+  sa = cbind(samn, savn)
+  plot(sa, main = "Scatter plot of (mean, variance)", xlab = "Normalized sample means", ylab = "Proportionalized sample variances")
+}
+
+
+```
+
+Given $X \sim N(2,3^2)$
+
+\
+
+##### Problem 2.1 - 2.4
+
+For $n = 20$
+
+```{r, echo = FALSE}
+sample_sim(20, 100)
+```
+
+---
+
+For $n = 30$
+
+```{r, echo = FALSE}
+sample_sim(30, 100)
+```
+
+---
+
+For $n = 50$
+
+```{r, echo = FALSE}
+sample_sim(50, 100)
+```
+
+---
+
+For $n = 75$
+
+```{r, echo = FALSE}
+sample_sim(75, 100)
+```
+
+
+##### Problem 2.5
+From the plots of the sample mean and sample variance made above, we can say that for a SRS, the sample mean follows a **normal distribution** while the sample variance follows a **$\chi^2$ distribution.**
+
+\
+
+##### Problem 2.6
+Based on the scatter plots generated from (sample mean, sample variance) it shows that the two have a weak correlation which proves that the two are **mutually independent.**
+
 
 ### **Problem 3**
 A binomial distribution can be interpreted alternatively as the sum of $n$ Bernoulli random variables. Each Bernoulli random variable has a mean defined as $p$.
