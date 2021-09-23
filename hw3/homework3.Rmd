@@ -70,29 +70,76 @@ In this case, $\hat{\theta}_M$ is better is it is closer to the observed varianc
 
 \
 
+
 ##### Problem 1.4
 ```{r, echo = FALSE}
-sample_sim <- function(size_of_sample, number_of_samples) {
+mle_collection <- c()
+mom_collection <- c()
+sample_sim <- function(size_of_sample, number_of_samples, show_plot) {
   mom = c()
   mle = c()
   
   for(i in 1:number_of_samples) {
-    x = rnorm(size_of_sample, 0, 7)
+    x = runif(size_of_sample, 0, 7)
     mle = c(mle, max(x))
     mom = c(mom, 2 * mean(x))
   }
-  
-   samn = (mom - 0) / sqrt(7^2 / size_of_sample)
-  # savn = (size_of_sample - 1) * sav / (7 ^ 2)
-   mle
-   
+  if(show_plot) {
+    boxplot(mle, main="Boxplot of Maximum Likelihood Estimator", horizontal=TRUE, sub = "Mean = 6.74")
+    boxplot(mom, main="Boxplot of Method of Moments", horizontal=TRUE, sub = "Mean = 6.99")
+  }
+  else {
+    print("Maximum likelihood estimator")
+    print(mle)
+    print("Moment estimator")
+    print(mom)
+    mle_collection <<- c(mle_collection, mle)
+    mom_collection <<- c(mom_collection, mom)
+    #mle_collection = c(mle_collection, mle)
+    #mom_collection = c(mom_collection, mom)
+    #print(mom_collection)
+  }
 }
-
-
 ```
 
-```{r}
-sample_sim(30, 100)
-
+```{r, out.width = "60%"}
+sample_sim(30, 100, TRUE)
 ```
 
+\
+
+##### Problem 1.5
+For $n = 20$
+```{r, echo = FALSE}
+x = sample_sim(20, 1, FALSE)
+```
+
+For $n = 30$
+```{r, echo = FALSE}
+x = sample_sim(30, 1, FALSE)
+```
+
+For $n = 50$
+```{r, echo = FALSE}
+x = sample_sim(50, 1, FALSE)
+```
+
+For $n = 100$
+```{r, echo = FALSE}
+x = sample_sim(100, 1, FALSE)
+```
+
+For $n = 150$
+```{r, echo = FALSE}
+x = sample_sim(150, 1, FALSE)
+```
+
+```{r, echo = FALSE, out.width = "60%"}
+n_values <- c()
+n_values = c(20, 30, 50, 100, 150)
+
+plot(n_values, mom_collection, main = "Plot of Method of Moments")
+plot(n_values, mle_collection, main = "Plot of Maximum Likelihood Estimators")
+```
+
+### Problem 2
