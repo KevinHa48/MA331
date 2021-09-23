@@ -68,3 +68,31 @@ $\hat{\theta}_K = X_n = 6.8$
 
 In this case, $\hat{\theta}_M$ is better is it is closer to the observed variance parameter from the given SRS.
 
+\
+
+##### Problem 1.4
+```{r, echo = FALSE}
+sample_sim <- function(size_of_sample, number_of_samples) {
+  mom = c()
+  mle = c()
+  
+  for(i in 1:number_of_samples) {
+    x = rnorm(size_of_sample, 0, 7)
+    mle = c(mle, max(x))
+    mom = c(mom, 2 * mean(x))
+  }
+  
+   samn = (mom - 0) / sqrt(7^2 / size_of_sample)
+  # savn = (size_of_sample - 1) * sav / (7 ^ 2)
+   mle
+   
+}
+
+
+```
+
+```{r}
+sample_sim(30, 100)
+
+```
+
