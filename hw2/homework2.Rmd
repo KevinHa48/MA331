@@ -97,23 +97,17 @@ For $n = 20$
 sample_sim(20, 100)
 ```
 
----
-
 For $n = 30$
 
 ```{r, echo = FALSE, out.width= "45%"}
 sample_sim(30, 100)
 ```
 
----
-
 For $n = 50$
 
 ```{r, echo = FALSE, out.width= "45%"}
 sample_sim(50, 100)
 ```
-
----
 
 For $n = 75$
 

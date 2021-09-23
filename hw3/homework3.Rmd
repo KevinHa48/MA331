@@ -1,0 +1,39 @@
+---
+title: "**Homework 3**"
+author: "Kevin Ha"
+date: "September 21, 2021"
+output: html_document
+---
+
+---
+
+### **Problem 1**
+
+##### Problem 1.1
+The moment estimator can be determined by following the Law of Large Numbers which states that the sample moment will eventually converge to the corresponding
+population moment. Based on this, the first sample moment which is equivalent to the sample mean can be set equal to the first population moment, which is the expected value of the population
+and can be used to find the moment estimator.
+
+\
+
+For the first sample moment, $k = 1$
+
+Sample mean: $\sum_{n}^{i = 1} X_i^1 = \overline{X}$
+
+Population mean: $E(X_i) = \frac{0 + \theta}{2} = \theta / 2$
+
+$\overline{X} = \theta / 2$
+
+$\theta = 2\overline{X}$
+
+$\hat{\theta}_M = 2\overline{X}$
+
+\
+
+##### Problem 1.2
+The PDF of the given uniform distribution is the following:
+
+$f(0, \theta) = \begin{cases} \frac{1}{\theta}, &  0 \leq x \leq \theta,\\ 0  & \text{otherwise }\end{cases}$
+
+Next, the likelihood function, $L(\theta)$ will be calculated
+
