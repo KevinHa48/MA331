@@ -143,3 +143,43 @@ plot(n_values, mle_collection, main = "Plot of Maximum Likelihood Estimators")
 ```
 
 ### Problem 2
+
+##### Problem 2.1
+
+First moment (mean): $\mu = E(X_i) = \frac{1}{n} \sum_{n=1}^{\infty} X_i$
+
+Second moment (variance): $\sigma^2 = E(X^2_i) - \mu^2$
+
+$\hat{\mu} = \frac{1}{n} \sum_{n=1}^{\infty} X_i = \bar{X}$
+
+$\hat{\sigma} = \frac{1}{n} \sum_{n=1}^{\infty} X^2_i - \bar{X}^2 = \frac{1}{n} \sum_{n=1}^{\infty} (X_i - \bar{X})^2$
+
+\
+
+##### Problem 2.2
+The Maximum Likelihood Estimator for the mean and variance is equivalent to the Method of Moments.
+
+$\tilde{\mu} = \bar{X}$
+
+$\tilde{\sigma}^2 = \frac{1}{n} \sum_{n=1}^{\infty} X^2_i - \bar{X}^2 = \frac{1}{n} \sum_{n=1}^{\infty} (X_i - \bar{X})^2$
+
+##### Problem 2.3
+Biasness for the mean can be tested if the following holds true: $E[\hat{\theta}(X_1, ... ,X_n)] = \theta$
+
+$E(\bar{X}) = E(\frac{1}{n} \sum_{n=1}^{\infty} X_i) = \frac{1}{n} \sum_{n=1}^{\infty} E(X_i) = \frac{1}{n} \sum_{n=1}^{\infty} \mu = \frac{1}{n}(n\mu) = \mu$,  **so $\hat{\mu}$ is unbiased**
+
+Biasness for the variance can be tested similarly:
+
+$E(\hat{\sigma}^2) = E(\frac{1}{n} \sum_{n=1}^{\infty} (X_i - \bar{X})^2) = \frac{(n-1)\sigma^2}{n}$
+
+But since $E(\hat{\sigma}^2) = \frac{(n-1)\sigma^2}{n} \neq \sigma^2$, **which means that $\hat{\sigma}^2$ is biased**
+
+##### Problem 2.4
+Based on the the fact that both MLE and MoM are equivalent:
+
+$\tilde{\mu}$ is **unbiased** and $\tilde{\sigma}^2$ is **biased**
+
+\
+
+### Problem 3
+
