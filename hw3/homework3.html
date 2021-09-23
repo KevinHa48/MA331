@@ -193,7 +193,28 @@ pre code {
 <h5>Problem 1.2</h5>
 <p>The PDF of the given uniform distribution is the following:</p>
 <p><span class="math inline">\(f(0, \theta) = \begin{cases} \frac{1}{\theta}, &amp; 0 \leq x \leq \theta,\\ 0 &amp; \text{otherwise }\end{cases}\)</span></p>
-<p>Next, the likelihood function, <span class="math inline">\(L(\theta)\)</span> will be calculated</p>
+<p>Next, the likelihood function, <span class="math inline">\(L(\theta)\)</span> will be calculated by the following:</p>
+<p><span class="math inline">\(L(\theta) = \prod_{i=1}^{n} \frac{1}{\theta} = \theta^{-n}\)</span></p>
+<p>Then take the derivative of the logarithmic likelihood with respect to <span class="math inline">\(\theta\)</span> to find the maximizer for <span class="math inline">\(L(\theta)\)</span></p>
+<p><span class="math inline">\(\frac{\mathrm{d} log L(\theta)}{d\theta} = -\frac{n}{\theta}\)</span></p>
+<p>Finally set it equal to 0 and solve the for <span class="math inline">\(\hat{\theta}_L\)</span></p>
+<p><span class="math inline">\(-\frac{n}{\theta} = 0\)</span></p>
+<p>Since the function is decreasing and if we assume that the uniformly distributed random variables follow this order: <span class="math inline">\(X_1 \leq X_2 \leq ... \leq X_n\)</span>, the largest value must be taken to to maximize the likelihood.</p>
+<p>So, <span class="math inline">\(\hat{\theta}_L = X_n\)</span></p>
+<p><br />
+</p>
+</div>
+<div id="problem-1.3" class="section level5">
+<h5>Problem 1.3</h5>
+<p>Taking the mean and variance of the given SRS:</p>
+<pre class="r"><code>x &lt;- c(1.0, 2.4, 3.2, 1.3, 0.5, 3.2, 6.8)
+mean(x)</code></pre>
+<pre><code>## [1] 2.628571</code></pre>
+<pre class="r"><code>var(x)</code></pre>
+<pre><code>## [1] 4.509048</code></pre>
+<p><span class="math inline">\(\hat{\theta}_M = 2\overline{X} = 2 (2.63) = 5.26\)</span></p>
+<p><span class="math inline">\(\hat{\theta}_K = X_n = 6.8\)</span></p>
+<p>In this case, <span class="math inline">\(\hat{\theta}_M\)</span> is better is it is closer to the observed variance parameter from the given SRS.</p>
 </div>
 </div>
 
