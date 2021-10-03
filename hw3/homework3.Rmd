@@ -142,7 +142,7 @@ plot(n_values, mom_collection, main = "Plot of Method of Moments")
 plot(n_values, mle_collection, main = "Plot of Maximum Likelihood Estimators")
 ```
 
-### Problem 2
+### **Problem 2**
 
 ##### Problem 2.1
 
@@ -163,6 +163,8 @@ $\tilde{\mu} = \bar{X}$
 
 $\tilde{\sigma}^2 = \frac{1}{n} \sum_{n=1}^{\infty} X^2_i - \bar{X}^2 = \frac{1}{n} \sum_{n=1}^{\infty} (X_i - \bar{X})^2$
 
+\
+
 ##### Problem 2.3
 Biasness for the mean can be tested if the following holds true: $E[\hat{\theta}(X_1, ... ,X_n)] = \theta$
 
@@ -174,6 +176,8 @@ $E(\hat{\sigma}^2) = E(\frac{1}{n} \sum_{n=1}^{\infty} (X_i - \bar{X})^2) = \fra
 
 But since $E(\hat{\sigma}^2) = \frac{(n-1)\sigma^2}{n} \neq \sigma^2$, **which means that $\hat{\sigma}^2$ is biased**
 
+\
+
 ##### Problem 2.4
 Based on the the fact that both MLE and MoM are equivalent:
 
@@ -181,5 +185,79 @@ $\tilde{\mu}$ is **unbiased** and $\tilde{\sigma}^2$ is **biased**
 
 \
 
-### Problem 3
+### **Problem 3**
 
+##### Problem 6.17 (a)
+
+Margin of Error is calculated by: $Z * \frac{\sigma}{\sqrt{n}}$
+
+Given a 95% confidence interval, $Z = 1.96$
+
+MoE = $1.96 * \frac{2.3}{\sqrt{340}} = 0.24$
+
+Confidence Interval: $(5.4 - 0.24, 5.4 + 0.24) = (5.16, 5.64)$
+
+\
+
+##### Problem 6.17 (b)
+
+Margin of Error is calculated by: $Z * \frac{\sigma}{\sqrt{n}}$
+
+Given a 99% confidence interval, $Z = 2.58$
+
+MoE = $2.58 * \frac{2.3}{\sqrt{340}} = 0.32$
+
+Confidence Interval: $(5.4 - 0.32, 5.4 + 0.32) = (5.08, 5.72)$
+
+**The result is a larger range of values within the confidence interval compared to part a, this makes sense as the higher the
+confidence, the larger the margin of error.**
+
+\
+
+##### Problem 6.27 (a)
+
+Margin of Error is calculated by: $Z * \frac{\sigma}{\sqrt{n}}$
+
+Given a 95% confidence interval, $Z = 1.96$
+
+MoE = $1.96 * \frac{8.3}{\sqrt{1200}} = 0.47$ 
+
+Confidence Interval: $(11.5 - 0.47, 11.5 + 0.47) = (11.03, 11.97)$
+
+\
+
+##### Problem 6.27 (b)
+
+**No, this is not true. The 95% confidence interval gives us 95% confidence that the population mean time spent listening to the radio per week lies between 11.03 and 11.97, and does not tell us anything about each sampled individual's time.**
+
+\
+
+##### Problem 6.27 (c)
+
+**The confidence interval is still a good approximation because the sample size affects the confidence interval, not the skewness of the distribution.**
+
+\
+
+##### Problem 6.28 (a)
+
+Mean = $11.5 * 60 = 690$ minutes
+
+Standard deviation = $8.3 * 60 = 498$ minutes
+
+\
+
+##### Problem 6.28 (b)
+
+Margin of Error is calculated by: $Z * \frac{\sigma}{\sqrt{n}}$
+
+Given a 95% confidence interval, $Z = 1.96$
+
+MoE = $1.96 * \frac{498}{\sqrt{1200}} = 28.18$ 
+
+Confidence Interval: $(690 - 28.18, 690 + 28.18) = (661.82, 718.18)$
+
+\
+
+##### Problem 6.28 (c)
+
+**This interval could have been directly calculated by simply multiplying the Margin of Error by 60 to get the equivalent Margin of Error in minutes and then simply multiplying the mean by 60 as well to get the equivalent mean in minutes.**
