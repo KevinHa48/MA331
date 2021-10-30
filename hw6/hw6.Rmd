@@ -1,0 +1,160 @@
+---
+title: "**Homework 6**"
+author: "Kevin Ha"
+date: "October 29, 2021"
+output: html_document
+---
+
+### **Problem 9.37**
+
+##### Problem 9.37a
+
+```{r, echo = FALSE}
+tab <- matrix(c(51, 6, 57, 12, 5, 17, 4, 1, 5, 67, 12, 79), ncol=3, byrow=TRUE)
+colnames(tab) <- c('Number allowed','Number not allowed', 'Total')
+rownames(tab) <- c('Small','Medium','Large', 'Total')
+tab <- as.table(tab)
+tab
+```
+
+\
+
+##### Problem 9.37b
+
+Not allowed in Small Stratum: $\frac{6}{57} = `r 6/57 * 100`$%
+
+Not allowed in Medium Stratum: $\frac{5}{17} = `r 5/17 * 100`$%
+
+Not allowed in Large Stratum: $\frac{1}{5} = `r 1/5 * 100`$%
+
+\
+
+##### Problem 9.37c
+Medium and large need to be combined as the expected count for the large stratum/not allowed is too small (< 5) and cannot be used for the $\chi^2$ significance test.
+
+\
+
+##### Problem 9.37d
+$H_0:$ There is no association between the size of the claim and the whether the claim is fraudulent or not.
+
+\
+
+##### Problem 9.37e
+Calculating chi-squared manually:
+
+```{r, echo = FALSE}
+tab2 <- matrix(c(51, 6, 16, 6), ncol=2, byrow=TRUE)
+colnames(tab2) <- c('Number allowed','Number not allowed')
+rownames(tab2) <- c('Small','Large')
+tab2 <- as.table(tab2)
+tab2
+
+
+print('Expected counts')
+
+tab3 <- matrix(c(((67*57) / 79), ((12*57) / 79), ((67*22) / 79), ((12*22) / 79)), ncol=2, byrow=TRUE)
+colnames(tab3) <- c('Number allowed','Number not allowed')
+rownames(tab3) <- c('Small','Large')
+tab3 <- as.table(tab3)
+tab3
+
+
+tab4 <- matrix(c((51-48.341772)^2 / 48.341772, (6-8.658228)^2 / 8.658228, (16 -  18.658228)^2 / 18.658228, (6-3.341772)^2 /3.341772), ncol=2, byrow=TRUE)
+colnames(tab4) <- c('Number allowed','Number not allowed')
+rownames(tab4) <- c('Small','Large')
+tab4 <- as.table(tab4)
+tab4
+
+```
+
+$\chi^2 = `r 0.1461712 + 0.8161227 +0.3787164 + 2.1144998`$
+
+$df = (r - 1)(c - 1) = (2 - 1)(2 - 1) = 1$
+
+$P$-value:
+
+```{r}
+pchisq(3.456, df = 1, lower.tail = FALSE)
+```
+
+### Problem 9.38
+
+##### Problem 9.38a
+
+Total number of claims not allowed:
+
+Small: $\frac{6}{57} * 3342 = `r (6/57) * 3342`$
+
+Medium: $\frac{5}{17} * 246 = `r (5/17)*246`$
+
+Large: $\frac{1}{5} * 58 = `r 1/5 * 58`$
+
+##### Problem 9.38b
+
+Margin of error for Small Claims:
+
+$SE \hat{p}_{small} = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{0.11(0.89)}{3342}} = `r sqrt((0.11*0.89) / 3342)`$
+
+\
+
+### Problem 9.50
+
+Probability for Interval (1):
+
+```{r, echo = FALSE}
+pnorm(-0.60, lower.tail = TRUE)
+```
+
+Probability for Interval (2):
+
+```{r, echo = FALSE}
+pnorm(-0.10, lower.tail = TRUE) - pnorm(-0.60, lower.tail = TRUE)
+```
+
+Probability for Interval (3):
+
+```{r, echo = FALSE}
+pnorm(0.1, lower.tail = TRUE) - pnorm(-0.10)
+```
+
+Probability for Interval (4):
+
+```{r, echo = FALSE}
+pnorm(0.6) - pnorm(0.10)
+```
+Probability for Interval (5):
+
+```{r, echo = FALSE}
+pnorm(0.6, lower.tail = FALSE)
+```
+
+Expected Counts:
+
+Interval (1): $0.274*500 = `r 0.274*500`$
+
+Interval (2): $0.186*500 = `r 0.186*500`$
+
+Interval (3): $0.080*500 = `r 0.080*500`$
+
+Interval (4): $0.186*500 = `r 0.186*500`$
+
+Interval (5): $0.274*500 = `r 0.274*500`$
+
+\
+
+Goodness of Fit Test:
+
+$\chi^2 = \Sigma\frac{(obs-exp)^2}{exp}$
+
+$\frac{(139-137)^2}{137} + \frac{(102-93)^2}{93} + \frac{(41-40)^2}{40} + \frac{(78-93)^2}{93} + \frac{(140-137)^2}{137} = `r (139-137)^2 / 137 + (102-93)^2 / 93 + (41-40)^2 / 40 + (78-93)^2 / 93 + (140-137)^2 / 137`$
+
+Degrees of Freedom = $5-1 = 4$
+
+P-value:
+```{r}
+pchisq(3.41, df = 4, lower.tail = FALSE)
+```
+
+\
+
+**Summary:** Since the p-value is high, we fail to reject the null hypothesis and thus the random numbers follow a standard normal distribution.

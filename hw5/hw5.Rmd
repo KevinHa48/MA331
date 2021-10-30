@@ -1,0 +1,282 @@
+---
+title: "**Homework 5**"
+author: "Kevin Ha"
+date: "October 16, 2021"
+output: html_document
+---
+
+---
+
+### **Problem 7.71**
+
+##### Problem 7.71a
+```{r, echo = FALSE, fig.width=3, fig.height=3}
+a = c(0, 2, 0, 1, 0.5, 0, 0.5, 2, 1, 0, 0, 0, 0, 1)
+b = c(3, 4, 0.5, 1, 2.5, 2, 1.5, 0, 1, 1.5, 1.5, 2.5, 4, 3, 3.5, 1, 3.5)
+
+plot(density(a))
+plot(density(b))
+```
+
+In examining the density of the values, there isn't a clear normal distribution shown. 
+
+**However since there is no presence of outliers or indication of strong skewness and $15 < n_1 + n_2 < 40$, where $n_1 =$ sample size of neutral group and $n_2 =$ sample size of sad group, the t procedures can still be used.**
+
+\
+
+##### Problem 7.71b
+
+```{r, echo = FALSE}
+tab <- matrix(c(14, mean(a), sd(a), 17, mean(b), sd(b)), ncol=3, byrow=TRUE)
+colnames(tab) <- c('Sample Size','Mean','Std. Dev.')
+rownames(tab) <- c('Neutral','Sad')
+tab <- as.table(tab)
+tab
+```
+
+\
+
+##### Problem 7.71c
+
+$H_0 : \mu_{Neutral} = \mu_{Sad}$ 
+
+$H_a: \mu_{Neutral} < \mu_{Sad}$
+
+\
+
+##### Problem 7.71d
+
+T-statistic formula:
+
+$t = \frac{\overline{X}_A - \overline{X}_B}{\sqrt{\frac{S^2_A}{n_A} + \frac{S^2_A}{n_B}}} = \frac{0.57 - 2.12}{\sqrt{\frac{0.73^2}{14} + \frac{1.24^2}{17}}} = `r (mean(a)- mean(b)) / sqrt( ((sd(a)^2) / 14) + ((sd(b)^2) / 17) )`$
+
+
+P-value is calculated using the t-value found above and $df = 13$ since $n_A - 1 < n_B - 1$
+
+```{r}
+pt(-4.3030975, 13)
+```
+
+**The p-value is extremely low enough to indicate the conclusion that the null hypothesis, $H_0$ should be rejected and a person's average spending is higher when they are sad.**
+
+\
+
+##### Problem 7.71e
+
+Confidence interval formula:
+
+$(\bar{x_1} - \bar{x_2}) \pm t^*\sqrt{\frac{s^2_A}{n_A} + \frac{s^2_B}{n_B}}$
+
+First calculate critical T-value, using $df = 13$
+
+```{r}
+t_value <- qt(0.025, 13)
+t_value
+```
+
+$\sqrt{\frac{s^2_A}{n_A} + \frac{s^2_B}{n_B}} = `r sqrt( ((sd(a)^2) / 14) + ((sd(b)^2) / 17) )`$
+
+\
+
+The interval when $df = 13$:
+
+**`r (mean(a) - mean(b)) + (t_value * 0.3593269)` to `r (mean(a) - mean(b)) - (t_value * 0.3593269)`**
+
+### **Problem 7.89**
+
+##### Problem 7.89a
+$H_0: \mu_{bf} = \mu_{formula}$
+
+$H_a: \mu_{bf} > \mu_{formula}$
+
+$t = \frac{\overline{X}_A - \overline{X}_B}{\sqrt{\frac{S^2_A}{n_A} + \frac{S^2_A}{n_B}}} = \frac{13.3 - 12.4}{\sqrt{\frac{1.7^2}{14} + \frac{1.8^2}{17}}} = `r (13.3- 12.4) / sqrt( ((1.7^2) / 23) + ((1.8^2) / 19) )`$
+
+P-value is calculated using the t-value found above and $df = 18$ since $n_A- 1 < n_B - 1$
+
+```{r}
+1 - pt(1.6537344, 18)
+```
+
+**The p-value when using $\alpha = 0.05$ indicates that the data does not provide substantial evidence to reject the null hypothesis, $H_0$**
+
+\
+
+##### Problem 7.89b
+
+Confidence interval formula:
+
+$(\bar{x_1} - \bar{x_2}) \pm t^*\sqrt{\frac{s^2_A}{n_A} + \frac{s^2_B}{n_B}}$
+
+First calculate critical T-value, using $df = 18$
+
+```{r}
+t_value <- qt(0.05, 18)
+t_value
+```
+
+$\sqrt{\frac{s^2_A}{n_A} + \frac{s^2_B}{n_B}} = `r sqrt( ((1.7^2) / 14) + ((1.8^2) / 17) )`$
+
+
+The 95% confidence interval when $df = 18$:
+
+**`r (13.3 - 12.4) + (t_value * 0.6300927)` to `r (13.3 - 12.4) - (t_value * 0.6300927)`**
+
+\
+
+##### Problem 7.89c
+
+**The assumptions are that we have two independent SRS from two distinct populations that are both normally distributed.**
+
+\
+
+### **Problem 7.102**
+
+##### Problem 7.102a
+$F = \frac{\sigma_{larger}}{\sigma_{smaller}} = \frac{s^2_1}
+{s^2_2} = \frac{9.1}{3.5} = `r 9.1 / 3.5`$
+
+\
+
+##### Problem 7.102b
+The appropriate value is given by the $F(15, 10)$ distribution at the 0.05 significance level.
+
+$F(15, 10) = 2.49$
+
+\
+
+##### Problem 7.102c
+
+**The results are significant at the 5% level since the calculated F test statistic is greater than the F-value found in the 0.05 significance level of the $F(15, 10)$ distribution.**
+
+**The null hypothesis can also be rejected because of this.**
+
+
+### **Problem 7.122**
+
+##### Problem 7.122a
+```{r, echo = FALSE}
+group1 = c(48.86, 50.60, 51.02, 47.99, 54.20, 50.66, 45.91, 48.79, 47.76, 51.13)
+group2 = c(48.88, 52.63, 52.55,50.94,53.02,50.66,47.78,48.44,48.92,51.63)
+group3 = c(48.9, 50.6, 51.0, 48.0, 54.2, 50.7, 45.9, 48.8, 47.8, 51.1)
+
+tab <- matrix(c(length(group1), mean(group1), var(group1), length(group2), mean(group2), var(group2)), ncol=3, byrow=TRUE)
+colnames(tab) <- c('Sample Size','Mean','Variance')
+rownames(tab) <- c('Group 1','Group 2')
+tab <- as.table(tab)
+tab
+```
+
+```{r}
+result <- t.test(group1, group2, var.equal=FALSE)
+result$parameter
+```
+
+T-statistic formula:
+
+$t = \frac{\overline{X}_A - \overline{X}_B}{\sqrt{\frac{S^2_A}{n_A} + \frac{S^2_A}{n_B}}} = `r (mean(group1)- mean(group2)) / sqrt( ((sd(group1)^2) / 10) + ((sd(group2)^2) / 10) )`$
+
+
+P-value (two-tailed test) is calculated using the t-value found above and $df = 17$
+
+```{r}
+2 * pt(-0.8953783, 17)
+```
+
+\
+
+##### Problem 7.122b
+```{r, echo = FALSE}
+mean_diff <- mean(group1 - group2)
+var_diff <- var(group1 - group2)
+sd_diff <- sd(group1 - group2)
+sprintf("Mean of the differences: %0.3f", mean_diff)
+sprintf("Variance of the differences: %0.3f", var_diff)
+sprintf("Standard deviation of the differences: %0.3f", sd_diff)
+
+
+```
+
+Paired T-statistic formula:
+
+$t = \frac{\overline{X}_{diff}}{\sqrt{\frac{S^2_{diff}}{n_{total}}}} = `r (mean_diff / sqrt( ((sd_diff^2) / 10) ))`$
+
+P-value (two-tailed test) is calculated using the t-value found above and $df = 10 - 1 = 9$
+
+```{r}
+2 * pt(-2.1254263, 9)
+```
+
+\
+
+##### Problem 7.122c
+
+**The differences in the degrees of freedom were the result of using an unpaired and paired test and if $\alpha = 0.05$ both p-values are not statistically significant and the differences are result of using a two sample vs one sample t test.**
+
+\
+
+### **Problem 8.71**
+
+##### Problem 8.71a
+
+Proportion for females juveniles:
+
+$\hat{p}_{f} = \frac{48}{60} = `r 48/60`$
+
+Standard error for females juveniles:
+
+$SE \hat{p}_{f} = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{0.8(0.2)}{60}} = `r sqrt((0.8*0.2) / 60)`$
+
+Proportion for male juveniles:
+
+$\hat{p}_{m} = \frac{52}{132} = `r 52/132`$
+
+Standard error for male juveniles:
+
+$SE \hat{p}_{m} = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{0.3939(1-0.3939)}{132}} = `r sqrt((0.3939*(1-0.3939)) / 132)`$
+
+\
+
+##### Problem 8.71b
+
+Difference in population proportions:
+
+$D = \hat{p}_{f} - \hat{p}_{m} = `r 0.8 - 0.3939`$
+
+Standard error of D:
+
+$SE_{D} = \sqrt{\frac{\hat{p}_f(1-\hat{p}_f)}{n_f} + \frac{\hat{p}_m(1-\hat{p}_m)}{n_m}} = `r sqrt((0.8*(0.2))/60 + (0.3939*(1-0.3939))/132)`$
+
+Margin of error for 90% confidence interval:
+
+$MoE = z* \sqrt{SE_{D}} = `r 1.645 * 0.0668979`$
+
+90% confidence interval:
+
+$0.4061 \pm 0.110047$
+
+$`r 0.4061 - 0.110047`$ to $`r 0.4061 + 0.110047`$ 
+
+**Summary: With 90% confidence, the difference in proportion of female references to male references lies in between $(0.296053, 0.516147)$**
+
+\
+
+##### Problem 8.71c
+
+First, find the pooled sample proportion, $p$:
+
+$\hat{p} = \frac{48+52}{60+132} = `r (48+52) / (60+132)`$
+
+Next, calculate the pooled standard error:
+
+$SED_p = \sqrt{\hat{p} (1-\hat{p}) \frac{1}{n_1} + \frac{1}{n_2}} = `r sqrt((0.5208333*(1-0.5208333))* ((1/60) + (1/132)))`$
+
+Z statistic formula:
+
+$z = \frac{\hat{p}_f - \hat{p}_m}{SED_p} = `r 0.4061 / 0.0777823`$
+
+$P \approx 0$
+```{r}
+2*(1-pnorm(5.2209822))
+```
+
+**The near 0 p-value provides strong evidence to indicate that the null hypothesis of the two proportions being equal should be rejected.**

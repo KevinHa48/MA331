@@ -1,7 +1,7 @@
 ---
 title: "**Homework 4**"
 author: "Kevin Ha"
-date: "September 39, 2021"
+date: "September 30, 2021"
 output: html_document
 ---
 ---
@@ -42,12 +42,12 @@ Given $z = -1.69$
 
 $H_a: \mu > \mu_0 = P(Z \geq -1.69) = 1 - P(Z \leq -1.69)$
 
-```{r, echo = FALSE}
+```{r}
 p_val <- pnorm(-1.69)
 p_val
 ```
 
-$1 - P(Z \leq -1.69)$ = $`r 1 - p_val`$
+$P(Z \geq -1.69) = 1 - P(Z \leq -1.69)$ = $`r 1 - p_val`$
 
 \
 
@@ -59,9 +59,13 @@ $P(Z \leq -1.69)$ = $`r p_val`$
 \
 
 ##### 6.59 (c)
-$H_a: \mu \neq \mu_0 = 2P(Z \geq -1.69)$
+$H_a: \mu \neq \mu_0 = 2P(Z \geq |-1.69|)$
+```{r}
+absp_val <- pnorm(1.69)
+absp_val
+```
 
-$2P(Z \geq -1.69)$ = $`r 2*(1-p_val)`$
+$2P(Z \geq 1.69)$ = $1 - P(Z \leq 1.69) = `r 2*(1-absp_val)`$
 
 \
 
@@ -85,9 +89,9 @@ $H_a: \mu > 115 = 1 - P(Z \leq 2.1\overline{3}) = `r 1 - p_val`$
 \
 
 ##### 6.71 (b)
-**The two important assumptions are that there is a SRS and there is a normal distribution of the data. SRS is more important, as normal distribution doesn't influence since there isn't any assumed skewdness or outliers within the data.**
+**The two important assumptions are that there is a SRS and there is a normal distribution of the data. SRS is more important, as normal distribution doesn't influence since there isn't any assumed skewness or outliers within the data.**
 
-### **Problem 6.73**
+### **Problem 6.73**s
 ##### 6.73 (a)
 $H_0:$ $\mu = 0$ mpg  
 $H_a:$ $\mu \neq 0$ mpg
@@ -109,7 +113,7 @@ p_val
 
 $H_a: 2(1 - P(Z < 4.07)) = `r 2 * (1 - p_val)`$
 
-**The P-value is extremely small which indicates that the calculations are different.**
+**The P-value is extremely small which indicates that there is strong evidence against the null hypothesis and indicates that the calculations will be different.**
 
 \
 
@@ -158,5 +162,60 @@ $H_a: 1 - P(Z < 0.72) = `r (1 - p_val)`$
 
 ### **Problem 6.120**
 
+##### 6.120 (a)
 
+**Probability of Type I error**:
 
+$P(X \leq 2 \text{ when  } p_0 \text{ is correct}) = 0.1 + 0.1 + 0.2 = 0.4$
+
+##### 6.120 (b)
+
+**Probability of Type II error**:
+
+$P(X > 2 \text{ when  } p_1 \text{ is correct}) = 0.1 + 0.1 + 0.1 + 0.1 = 0.4$
+
+\
+
+### **Problem 7.22**
+
+##### 7.22(a)
+Degrees of freedom: $n - 1 = 16 - 1 = 15$
+
+##### 7.22(b)
+$t$ is bracketed by $t^* = 2.131$ and $t^* = 2.249$
+
+##### 7.22(c)
+The p-value falls in between the range:  $0.02 < p < 0.025$
+
+##### 7.22(d)
+$t = 2.15$ is **statistically significant** at the 5% level as $p < 0.05$, however it is **not significant** at the 1% level as $p > 0.01$
+
+##### 7.22(e)
+
+```{r}
+1 - pt(q = 2.15, df = 15)
+```
+
+\
+
+### **Problem 7.23**
+
+##### 7.23(a)
+Degrees of freedom: $n - 1 = 27 - 1 = 26$
+
+##### 7.23(b)
+$t$ is bracketed by $t^* = 1.706$ and $t^* = 2.056$
+
+##### 7.23(c)
+Two tailed test so $2P(T \geq |t|)$
+
+The p-value falls in between the range: $0.05 < p < 0.10$
+
+##### 7.23(d)
+$t = 2.01$ is **not significant** at the 5% level as $p > 0.05$, and is **not significant** at the 1% level as $p > 0.01$
+
+##### 7.23(e)
+
+```{r}
+2 * (1 - pt(q = 2.01, df = 26))
+```
