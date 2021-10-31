@@ -172,6 +172,7 @@ pre code {
 </div>
 
 
+<hr />
 <div id="problem-9.37" class="section level3">
 <h3><strong>Problem 9.37</strong></h3>
 <div id="problem-9.37a" class="section level5">
@@ -222,6 +223,8 @@ pre code {
 <p><span class="math inline">\(P\)</span>-value:</p>
 <pre class="r"><code>pchisq(3.456, df = 1, lower.tail = FALSE)</code></pre>
 <pre><code>## [1] 0.0630226</code></pre>
+<p><br />
+</p>
 </div>
 </div>
 <div id="problem-9.38" class="section level3">
@@ -232,11 +235,25 @@ pre code {
 <p>Small: <span class="math inline">\(\frac{6}{57} * 3342 = 351.7894737\)</span></p>
 <p>Medium: <span class="math inline">\(\frac{5}{17} * 246 = 72.3529412\)</span></p>
 <p>Large: <span class="math inline">\(\frac{1}{5} * 58 = 11.6\)</span></p>
+<p><br />
+</p>
 </div>
 <div id="problem-9.38b" class="section level5">
 <h5>Problem 9.38b</h5>
+<p><span class="math inline">\(SE_{estimate} = SE_{sample-proportion} * (2n)\)</span></p>
 <p>Margin of error for Small Claims:</p>
-<p><span class="math inline">\(SE \hat{p}_{small} = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{0.11(0.89)}{3342}} = 0.0054124\)</span></p>
+<p><span class="math inline">\(SE \hat{p}_{small} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} * 2(n) = \sqrt{\frac{0.11(0.89)}{3342}} * 2(3342) = 36.1763348\)</span></p>
+<p><span class="math inline">\(MoE_{small} = 351.7894737 \pm 36.1763348\)</span></p>
+<p><br />
+</p>
+<p>Margin of error for Medium Claims:</p>
+<p><span class="math inline">\(SE \hat{p}_{medium} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} * 2(n) = \sqrt{\frac{0.29(1-0.29)}{246}} * 2(246) = 14.2339594\)</span></p>
+<p><span class="math inline">\(MoE_{small} = 72.3529412 \pm 14.2339594\)</span></p>
+<p><br />
+</p>
+<p>Margin of error for Large Claims:</p>
+<p><span class="math inline">\(SE \hat{p}_{large} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} * 2(n) = \sqrt{\frac{0.20(1-0.20)}{58}} * 2(58) = 6.0926185\)</span></p>
+<p><span class="math inline">\(MoE_{small} = 11.6 \pm 6.0926185\)</span></p>
 <p><br />
 </p>
 </div>
@@ -271,6 +288,40 @@ pre code {
 <p><br />
 </p>
 <p><strong>Summary:</strong> Since the p-value is high, we fail to reject the null hypothesis and thus the random numbers follow a standard normal distribution.</p>
+</div>
+<div id="problem-9.51" class="section level3">
+<h3>Problem 9.51</h3>
+<p>Intervals used:</p>
+<ol style="list-style-type: decimal">
+<li>Less than or equal to 0.32</li>
+<li>Less than or equal to 0.60</li>
+<li>Greater than 0.40 and less than or equal to 0.60</li>
+<li>Greater than -0.70 and less than or equal to -0.10</li>
+<li>Greater than 1.10</li>
+</ol>
+<pre class="r"><code>x = rnorm(500)
+
+obs1 = length(which(x &lt;= 0.32))
+exp1 = pnorm(0.32, mean(x), sd(x)) * 500
+
+obs2 = length(which(x &lt;= 0.60))
+exp2 = pnorm(0.60, mean(x), sd(x)) * 500
+
+obs3 = length(which(x &lt;= 0.60 &amp; x &gt; 0.40))
+exp3 = (pnorm(0.60, mean(x), sd(x)) - pnorm(0.40, mean(x), sd(x)))*500 
+
+obs4 = length(which(x &lt;= -0.10 &amp; x &gt; -0.70))
+exp4 = (pnorm(-0.10, mean(x), sd(x)) - pnorm(-0.70, mean(x), sd(x)))*500 
+
+obs5 = length(which(x &gt; 1.10))
+exp5 = pnorm(1.10, mean(x), sd(x), lower.tail = FALSE) * 500</code></pre>
+<p>Goodness of Fit Test:</p>
+<p><span class="math inline">\(\chi^2 = \Sigma\frac{(obs-exp)^2}{exp}\)</span></p>
+<p><span class="math inline">\(\chi^2 = 2.5806017\)</span></p>
+<p>Degrees of Freedom = <span class="math inline">\(5-1 = 4\)</span></p>
+<p>P-value:</p>
+<pre class="r"><code>pchisq(k, df = 4, lower.tail = FALSE)</code></pre>
+<pre><code>## [1] 0.6302633</code></pre>
 </div>
 
 

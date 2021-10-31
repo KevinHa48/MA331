@@ -5,6 +5,8 @@ date: "October 29, 2021"
 output: html_document
 ---
 
+---
+
 ### **Problem 9.37**
 
 ##### Problem 9.37a
@@ -77,6 +79,8 @@ $P$-value:
 pchisq(3.456, df = 1, lower.tail = FALSE)
 ```
 
+\
+
 ### Problem 9.38
 
 ##### Problem 9.38a
@@ -89,11 +93,35 @@ Medium: $\frac{5}{17} * 246 = `r (5/17)*246`$
 
 Large: $\frac{1}{5} * 58 = `r 1/5 * 58`$
 
+\
+
 ##### Problem 9.38b
+
+$SE_{estimate} = SE_{sample-proportion} * (2n)$
 
 Margin of error for Small Claims:
 
-$SE \hat{p}_{small} = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{0.11(0.89)}{3342}} = `r sqrt((0.11*0.89) / 3342)`$
+$SE \hat{p}_{small} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} * 2(n) = \sqrt{\frac{0.11(0.89)}{3342}} * 2(3342) = `r sqrt((0.11*0.89) / 3342) * (2*3342)`$
+
+$MoE_{small} = 351.7894737 \pm 36.1763348$ 
+
+\
+
+Margin of error for Medium Claims:
+
+$SE \hat{p}_{medium} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} * 2(n) = \sqrt{\frac{0.29(1-0.29)}{246}} * 2(246) = `r sqrt((0.29*0.71) / 246) * (2*246)`$
+
+$MoE_{small} = 72.3529412 \pm 14.2339594$ 
+
+\
+
+Margin of error for Large Claims:
+
+$SE \hat{p}_{large} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} * 2(n) = \sqrt{\frac{0.20(1-0.20)}{58}} * 2(58) = `r sqrt((0.20*0.80) / 58) * (2*58)`$
+
+$MoE_{small} = 11.6 \pm 6.0926185$ 
+
+
 
 \
 
@@ -158,3 +186,52 @@ pchisq(3.41, df = 4, lower.tail = FALSE)
 \
 
 **Summary:** Since the p-value is high, we fail to reject the null hypothesis and thus the random numbers follow a standard normal distribution.
+
+
+### Problem 9.51
+
+Intervals used:
+
+1. Less than or equal to 0.32
+2. Less than or equal to 0.60
+3. Greater than 0.40 and less than or equal to 0.60
+4. Greater than -0.70 and less than or equal to -0.10
+5. Greater than 1.10
+
+```{r}
+x = rnorm(500)
+
+obs1 = length(which(x <= 0.32))
+exp1 = pnorm(0.32, mean(x), sd(x)) * 500
+
+obs2 = length(which(x <= 0.60))
+exp2 = pnorm(0.60, mean(x), sd(x)) * 500
+
+obs3 = length(which(x <= 0.60 & x > 0.40))
+exp3 = (pnorm(0.60, mean(x), sd(x)) - pnorm(0.40, mean(x), sd(x)))*500 
+
+obs4 = length(which(x <= -0.10 & x > -0.70))
+exp4 = (pnorm(-0.10, mean(x), sd(x)) - pnorm(-0.70, mean(x), sd(x)))*500 
+
+obs5 = length(which(x > 1.10))
+exp5 = pnorm(1.10, mean(x), sd(x), lower.tail = FALSE) * 500
+
+```
+
+Goodness of Fit Test:
+
+$\chi^2 = \Sigma\frac{(obs-exp)^2}{exp}$
+
+```{r, echo = FALSE}
+k = (obs1-exp1)^2 / exp1 + (obs2-exp2)^2 / exp2 + (obs3-exp3)^2 / exp3 + (obs4-exp4)^2 / exp4 + (obs5-exp5)^2 / exp5
+```
+
+$\chi^2 = `r k`$
+
+
+Degrees of Freedom = $5-1 = 4$
+
+P-value:
+```{r}
+pchisq(k, df = 4, lower.tail = FALSE)
+```
