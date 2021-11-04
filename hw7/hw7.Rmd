@@ -1,0 +1,152 @@
+---
+title: "**Homework 7**"
+author: "Kevin Ha"
+date: "September 21, 2021"
+output: html_document
+---
+
+---
+
+
+### **Problem 12.31**
+
+##### Problem 12.31a
+
+```{r, echo = FALSE}
+Control <- c(5.3, 3.9, 16.5, -14.9, -0.3, -4.3, -30.4, -12.5,
+-15.4, -19.5, -6.5, 13.4, -4.2, 6.9, 25.5, -0.3,-3.2, 1.9,
+-6.6, -12.7, -1.2, -13.7, 14.3, 8.8, 6.8, -7.1, -9.9,
+-5.6, 15.5, 4.8, 6.1, -4.9, 6.1, 6.6, -4.5)
+
+Individual <- c(-6.8	,
+-4.8	,
+5.5	,
+11.9	,
+-9.0	,
+-4.7	,
+-9.1	,
+-15.1	,
+-1.6	,
+-3.8	,
+7.3	,
+-6.3	,
+12.4	,
+-0.9	,
+-1.9	,
+-18.3	,
+6.9	,
+-17.8	,
+10.4	,
+-23.5	,
+8.0	,
+-5.7	,
+0.5	,
+-2.1	,
+-5.0	,
+-8.4	,
+0.2	,
+12.0	,
+-5.6	,
+-1.6	,
+-10.7	,
+-4.0	,
+-11.0	,
+-12.1	,
+-15.1)
+
+Group <- c(-11.4	,
+-7.3	,
+-19.8	,
+-13.7	,
+-9.0	,
+-22.4	,
+-9.6	,
+1.1	,
+-2.6	,
+-0.4	,
+-2.5	,
+-1.0	,
+-2.2	,
+-32.1	,
+-30.5	,
+-4.1	,
+-18.1	,
+-5.5	,
+-14.1	,
+-18.2	,
+-11.0	,
+-19.0	,
+3.1	,
+-12.0	,
+-24.4	,
+-11.3	,
+11.3	,
+-5.2	,
+-12.9	,
+-18.6	,
+19.4	,
+-19.2	,
+-23.9	,
+-19.6	)
+
+tab <- matrix(c(35, -1.01, 11.50, 34, -10.79, 11.14, 35, -3.71, 9.08), ncol=3, byrow=TRUE)
+colnames(tab) <- c('Sample Size','Sample Mean', 'Sample Standard Deviation')
+rownames(tab) <- c('Control','Group','Individual')
+tab <- as.table(tab)
+tab
+
+```
+
+\
+
+##### Problem 12.31b
+
+**Yes, because the largest standard deviation is less than twice the smallest. $(11.50 < 2(9.08))$**
+
+\
+
+##### Problem 12.31c
+
+```{r, echo = FALSE, hist-side, fig.show="hold", out.width="50%"}
+
+hist(Control)
+hist(Individual)
+hist(Group)
+
+```
+
+**We can be confident that the samples means are approximately normal as most of the groups appear symmetric from the histogram distribution and have a sample size > 15.**
+
+### **Problem 12.32**
+##### Problem 12.31a
+
+```{r, echo = FALSE}
+library(readxl)
+loss <- read_excel("ex12-31loss.xls")
+str(loss)
+attach(loss)
+tapply(loss$Loss, loss$Group, length)
+tapply(loss$Loss, loss$Group, mean)
+tapply(loss$Loss, loss$Group, var)
+oneway.test(loss$Loss ~ loss$Group)
+
+```
+
+**Summary: Because of the small p-value, the null hypothesis can be rejected and thus the group population means are not all equal.**
+
+\
+
+##### Problem 12.31b
+
+
+
+\
+
+
+##### Problem 12.31c
+```{r, echo = FALSE}
+library("agricolae")
+modi = aov(loss$Loss ~ loss$Group)
+comparison = LSD.test(modi, "loss$Group", p.adj = "none")
+comparison
+```
