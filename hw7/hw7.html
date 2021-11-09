@@ -200,24 +200,20 @@ pre code {
 <h3><strong>Problem 12.32</strong></h3>
 <div id="problem-12.32a" class="section level5">
 <h5>Problem 12.32a</h5>
-<pre><code>## tibble [104 × 2] (S3: tbl_df/tbl/data.frame)
-##  $ Group: chr [1:104] &quot;Ctrl&quot; &quot;Ctrl&quot; &quot;Ctrl&quot; &quot;Ctrl&quot; ...
-##  $ Loss : num [1:104] 5.3 3.9 16.5 -14.9 -0.3 -4.3 -30.4 -12.5 -15.4 -19.5 ...</code></pre>
-<pre><code>## The following object is masked _by_ .GlobalEnv:
-## 
-##     Group</code></pre>
-<pre><code>##  Ctrl   Grp Indiv 
-##    35    34    35</code></pre>
-<pre><code>##       Ctrl        Grp      Indiv 
-##  -1.008571 -10.785294  -3.708571</code></pre>
-<pre><code>##      Ctrl       Grp     Indiv 
-## 132.26669 124.08069  82.41669</code></pre>
-<pre><code>## 
-##  One-way analysis of means (not assuming equal variances)
-## 
-## data:  loss$Loss and loss$Group
-## F = 6.9773, num df = 2.000, denom df = 66.362, p-value = 0.001777</code></pre>
-<p><strong>Summary: Because of the small p-value, the null hypothesis can be rejected and thus the group population means are not all equal.</strong></p>
+<p>One way ANOVA:</p>
+<p><span class="math inline">\(\bar{X} = \frac{(n_1\bar{X_1} + n_2\bar{X_2} + n_3\bar{X_3})}{(n_1 + n_2 + n_3)} = \frac{(35*-1.01 + 34*-10.79 + 35*-3.71)}{(35+34+35)} = -5.12\)</span></p>
+<p><span class="math inline">\(SSB = \sum^3_{i=1}n_i(\bar{X}_i - \bar{X})^2 = 35(-1.01 + 5.12)^2 + 34(-10.79 + 5.12)^2 + 35(-3.71 + 5.12)^2 = 1753.87`\)</span></p>
+<p><span class="math inline">\(SSE = \sum^3_{i=1}(n_i - 1)S^2_i = (35-1)(11.50)^2 + (34-1)(11.14)^2 + (35-1)(9.08)^2 = 11394.96\)</span></p>
+<p><span class="math inline">\(f = \frac{MSB}{MSE} = \frac{SSB/(k-1)}{SSE/(n-k)}= \frac{1753.87/(3-1)}{11394.96/(104-3)} = 7.77\)</span></p>
+<pre class="r"><code>pf(7.77, 2, 103, lower.tail = FALSE)</code></pre>
+<pre><code>## [1] 0.0007195708</code></pre>
+<!-- str(loss) -->
+<!-- attach(loss) -->
+<!-- tapply(loss$Loss, loss$Group, length) -->
+<!-- tapply(loss$Loss, loss$Group, mean) -->
+<!-- tapply(loss$Loss, loss$Group, var) -->
+<!-- oneway.test(loss$Loss ~ loss$Group) -->
+<p><strong>Summary: Because of the p-value is less than 0.05, the null hypothesis can be rejected and thus the group population means are not all equal.</strong></p>
 <p><br />
 </p>
 </div>
@@ -311,6 +307,12 @@ qqline(model$residual)</code></pre>
 <p>Looking up are the linear combinations of each eye color: <span class="math inline">\(\mu_1 + \mu_2 + \mu_4\)</span></p>
 <p>Taking the average of the combination above and contrasting it with the looking down (<span class="math inline">\(\mu_3\)</span>):</p>
 <p><span class="math inline">\(\phi_2 = \frac{(\mu_1 + \mu_2 + \mu_4)}{3} - \mu_3\)</span></p>
+</div>
+</div>
+<div id="problem-12.42" class="section level3">
+<h3>Problem 12.42</h3>
+<div id="problem-12.42a" class="section level5">
+<h5>Problem 12.42a</h5>
 </div>
 </div>
 

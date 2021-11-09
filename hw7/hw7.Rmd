@@ -123,16 +123,30 @@ hist(Group)
 ```{r, echo = FALSE}
 library(readxl)
 loss <- read_excel("ex12-31loss.xls")
-str(loss)
-attach(loss)
-tapply(loss$Loss, loss$Group, length)
-tapply(loss$Loss, loss$Group, mean)
-tapply(loss$Loss, loss$Group, var)
-oneway.test(loss$Loss ~ loss$Group)
-
 ```
 
-**Summary: Because of the small p-value, the null hypothesis can be rejected and thus the group population means are not all equal.**
+One way ANOVA:
+
+$\bar{X} = \frac{(n_1\bar{X_1} + n_2\bar{X_2} + n_3\bar{X_3})}{(n_1 + n_2 + n_3)} = \frac{(35*-1.01 + 34*-10.79 + 35*-3.71)}{(35+34+35)} = -5.12$ 
+
+$SSB = \sum^3_{i=1}n_i(\bar{X}_i - \bar{X})^2 = 35(-1.01 + 5.12)^2 + 34(-10.79 + 5.12)^2 + 35(-3.71 + 5.12)^2 = 1753.87`$
+
+$SSE = \sum^3_{i=1}(n_i - 1)S^2_i = (35-1)(11.50)^2 + (34-1)(11.14)^2 + (35-1)(9.08)^2 = 11394.96$
+
+$f = \frac{MSB}{MSE} = \frac{SSB/(k-1)}{SSE/(n-k)}= \frac{1753.87/(3-1)}{11394.96/(104-3)} = 7.77$
+
+```{r}
+pf(7.77, 2, 103, lower.tail = FALSE)
+```
+
+<!-- str(loss) -->
+<!-- attach(loss) -->
+<!-- tapply(loss$Loss, loss$Group, length) -->
+<!-- tapply(loss$Loss, loss$Group, mean) -->
+<!-- tapply(loss$Loss, loss$Group, var) -->
+<!-- oneway.test(loss$Loss ~ loss$Group) -->
+
+**Summary: Because of the p-value is less than 0.05, the null hypothesis can be rejected and thus the group population means are not all equal.**
 
 \
 
