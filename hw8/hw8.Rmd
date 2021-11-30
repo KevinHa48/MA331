@@ -1,0 +1,225 @@
+---
+title: "**Homework 8**"
+author: "Kevin Ha"
+date: "November 27, 2021"
+output: html_document
+---
+
+---
+
+```{r, echo = FALSE}
+data = read.csv("Water-Quality.csv")
+modified0 = read.csv("Water-Quality2.csv")
+modified100 = read.csv("Water-Quality3.csv")
+```
+
+### Problem 10.32
+
+##### Problem 10.32a
+```{r, out.width="60%"}
+plot(density(data$IBI))
+plot(density(data$Area))
+```
+
+**Graphical Summary**: IBI is left skewed, Area is right skewed.
+
+```{r, echo = FALSE}
+a_mean <- mean(data$Area)
+a_sd <- sd(data$Area)
+f_mean <- mean(data$Forest)
+f_sd <- sd(data$Forest)
+ibi_mean <- mean(data$IBI)
+ibi_sd <- sd(data$IBI)
+```
+
+**Numerical summary**: 
+
+$\bar{x} = `r a_mean`$
+
+$s_x = `r a_sd`$
+
+$\bar{y} = `r ibi_mean`$
+
+$s_y = `r ibi_sd`$
+
+\
+
+##### Problem 10.32b
+
+```{r, out.width = "60%"}
+plot(data$IBI ~ data$Area, data = data)
+```
+
+**There is a weak and positive association between IBI and Area. No outliers or unusual patterns.**
+
+\
+
+##### Problem 10.32c
+
+$y_i = \beta_0 + \beta_1x_i+\epsilon_i$ where $i = 1, 2, ... 49$
+
+\
+
+##### Problem 10.32d
+
+$H_0: B_1 = 0$
+
+$H_a: B_1 \neq 0$
+
+\
+
+##### Problem 10.32e
+
+```{r, out.width = "60%"}
+fml = lm(data$IBI ~ data$Area)
+summary(fml)
+```
+
+$IB\hat{I} = 52.92 + 0.46\cdot{Area}$
+
+$s = 16.53$
+
+$f = 11.67$
+
+$p = 0.0013$
+
+\
+
+##### Problem 10.32f
+
+```{r, out.width = "60%"}
+plot(residuals.lm(fml))
+```
+
+Nothing noticeably unusual.
+
+##### Problem 10.32g
+```{r, out.width = "60%"}
+qqnorm(residuals(fml))
+qqline(residuals(fml))
+```
+
+**The residuals are not approximately normal since there appears to be a left skew among the data points on the scatterplot.**
+
+\
+
+##### Problem 10.32e
+
+**The assumptions in part C do not appear to be reasonable since we assumed that the residuals ($\epsilon$) 
+is normally distributed, but the QQ plot above does not reflect this assumption.**
+
+\
+
+### Problem 10.33
+
+##### Problem 10.33a
+
+```{r, out.width="60%"}
+plot(density(data$IBI))
+plot(density(data$Forest))
+```
+
+**Graphical Summary**: IBI is left skewed, Area is right skewed.
+
+**Numerical summary**: 
+
+$\bar{x} = `r f_mean`$
+
+$s_x = `r f_sd`$
+
+$\bar{y} = `r ibi_mean`$
+
+$s_y = `r ibi_sd`$
+
+\
+
+##### Problem 10.33b
+
+```{r, out.width = "60%"}
+plot(data$IBI ~ log(data$Forest), data = data)
+```
+
+**There is a weak and positive association between IBI and Area. No outliers or unusual patterns.**
+
+\
+
+##### Problem 10.33c
+
+$y_i = \beta_0 + \beta_1x_i+\epsilon_i$ where $i = 1, 2, ... 49$
+
+\
+
+##### Problem 10.33d
+
+$H_0: B_1 = 0$
+
+$H_a: B_1 \neq 0$
+
+\
+
+##### Problem 10.33e
+
+```{r, out.width = "60%"}
+fml2 = lm(data$IBI ~ data$Forest)
+summary(fml2)
+```
+
+$IB\hat{I} = 59.9 + 0.153\cdot{Forest}$
+
+$s = 17.79$
+
+$f = 3.689$
+
+$p = 0.06$
+
+\
+
+##### Problem 10.33f
+
+```{r, out.width = "60%"}
+plot(residuals.lm(fml2))
+```
+
+Nothing noticeably unusual.
+
+##### Problem 10.33g
+```{r, out.width = "60%"}
+qqnorm(residuals(fml2))
+qqline(residuals(fml2))
+```
+
+**The residuals are not approximately normal since there appears to be a left skew among the data points on the scatterplot.**
+
+\
+
+##### Problem 10.33e
+
+**The assumptions in part C do not appear to be reasonable since we assumed that the residuals ($\epsilon$) 
+is normally distributed, but the QQ plot above does not reflect this assumption.**
+
+\
+
+### Problem 10.34
+
+**The area would be the preferred explanatory variable as it has a higher R-squared value compared to the Forest's R-squared value (0.1988 > 0.07)
+additionally, the Area has a lower p-value (0.001 < 0.06) which supports the claim as it indicates there is a statistically significant relationship between the two**
+
+\
+
+### Problem 10.35
+
+The p-values are calculated below:
+
+```{r}
+fml3 = lm(modified0$IBI ~ modified0$Forest)
+fsum <- summary(fml3)$fstatistic
+pf(fsum[1], fsum[2], fsum[3], lower.tail=FALSE)
+```
+
+```{r}
+fml4 = lm(modified100$IBI ~ modified100$Forest)
+fsum2 <- summary(fml4)$fstatistic
+pf(fsum2[1], fsum2[2], fsum2[3], lower.tail=FALSE)
+```
+
+**When you decrease the IBI to 0 for an observation with 0% forest the p-value decreases thus a more significant relationship, the p-value decreases when the IBI is set to 0 for an observation with 100% forest resulting and a weaker association between the two.**
