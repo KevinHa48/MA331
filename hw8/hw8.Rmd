@@ -71,7 +71,7 @@ $H_a: B_1 \neq 0$
 ##### Problem 10.32e
 
 ```{r, out.width = "60%"}
-fml = lm(data$IBI ~ data$Area)
+fml = lm(IBI ~ Area, data = data)
 summary(fml)
 ```
 
@@ -103,7 +103,7 @@ qqline(residuals(fml))
 
 \
 
-##### Problem 10.32e
+##### Problem 10.32h
 
 **The assumptions in part C do not appear to be reasonable since we assumed that the residuals ($\epsilon$) 
 is normally distributed, but the QQ plot above does not reflect this assumption.**
@@ -192,7 +192,7 @@ qqline(residuals(fml2))
 
 \
 
-##### Problem 10.33e
+##### Problem 10.33h
 
 **The assumptions in part C do not appear to be reasonable since we assumed that the residuals ($\epsilon$) 
 is normally distributed, but the QQ plot above does not reflect this assumption.**
@@ -223,3 +223,61 @@ pf(fsum2[1], fsum2[2], fsum2[3], lower.tail=FALSE)
 ```
 
 **When you decrease the IBI to 0 for an observation with 0% forest the p-value decreases thus a more significant relationship, the p-value decreases when the IBI is set to 0 for an observation with 100% forest resulting and a weaker association between the two.**
+
+### Problem 10.36
+
+##### Problem 10.36a
+
+The 95% confidence interval is calculated using the following R function below:
+
+```{r}
+new <- data.frame(Area = 40)
+predict(fml, newdata = new, interval = 'confidence', level = 0.95)
+```
+
+**Confidence Interval**: (65.61, 77.04)
+
+##### Problem 10.36b
+
+```{r}
+new <- data.frame(Area = 40)
+predict(fml, newdata = new, interval = 'prediction', level = 0.95)
+```
+
+**Prediction Interval**: (37.58, 105.08)
+
+\
+
+##### Problem 10.36c
+
+The **confidence interval for the mean response** gives an interval estimate on where the true population mean value of the response (dependent) variable IBI falls within when associated with an area of 40 $km^2$
+
+The **prediction interval for the future response** gives an interval estimate on what the predicted IBI value should be when associated with an area of 40 $km^2$ is expected to fall in between for a future observation.
+
+\
+
+##### Problem 10.36d
+
+These results cannot be applied exactly to other streams in Arkansas or other states since there a lot more different environments and other factors that influence IBI of other streams. However, the same process can be applied to determine the characteristics above given the proper data and influential factors.
+
+\
+
+### Problem 10.37
+
+$Area = 10$
+
+Predicted IBI for Area of $km^2$
+
+$\hat{y} = 52.92 + 0.46 * 10 = 57.52$
+
+\
+
+$Forest = 63$
+
+Predicted IBI for Forest = 63
+
+$\hat{y} = 59.9 + 0.153 * 63 = 69.55$
+
+\
+
+The reasoning for the differences of these estimates is due to the fact that prediction intervals have a lot of uncertainty due to their wide prediction intervals. In the previous problem above the standard error was about approximately 70 units which shows great uncertainty.
