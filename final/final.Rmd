@@ -1,0 +1,73 @@
+---
+title: "MA-331 Final"
+author: "Kevin Ha"
+date: "12/14/2021"
+output: html_document
+---
+
+---
+
+```{r, echo = FALSE}
+library(readxl)
+biomark <- read_excel("Biomark.xls")
+```
+
+### Problem 11.36
+
+##### Problem 11.36a
+
+```{r, figures-sode, fig.show = "hold", out.width = "40%", echo = FALSE}
+plot(density(biomark$voplus), main = "VO+")
+plot(density(biomark$vominus), main = "VO-")
+plot(density(biomark$oc), main = "OC")
+plot(density(biomark$trap), main = "TRAP")
+```
+
+```{r, echo = FALSE}
+mean_vo_p = mean(biomark$voplus)
+sd_vo_p = sd(biomark$voplus)
+mean_vo_m = mean(biomark$vominus)
+sd_vo_m = sd(biomark$vominus)
+mean_oc = mean(biomark$oc)
+sd_oc = sd(biomark$oc)
+mean_trap = mean(biomark$trap)
+sd_trap = sd(biomark$trap)
+```
+
+
+Numerical summary for VO+:
+
+$\bar{X}_{VO+}=`r mean_vo_p`$
+
+$s_{VO+}=`r sd_vo_p`$
+
+\
+
+Numerical summary for VO-:
+
+$\bar{X}_{VO-}=`r mean_vo_m`$
+
+$s_{VO-}=`r sd_vo_m`$
+
+\
+
+Numerical summary for OC:
+
+$\bar{X}_{OC}=`r mean_oc`$
+
+$s_{OC}=`r sd_oc`$
+
+\
+
+Numerical summary for TRAP:
+
+$\bar{X}_{TRAP}=`r mean_trap`$
+
+$s_{TRAP}=`r sd_trap`$
+
+\
+
+Graphical summary for all: **Right skewed.**
+
+##### Problem 11.36b
+
