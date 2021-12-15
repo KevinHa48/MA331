@@ -14,9 +14,9 @@ biomark <- read_excel("Biomark.xls")
 
 ### Problem 11.36
 
-##### Problem 11.36a
+##### **Problem 11.36a**
 
-```{r, figures-sode, fig.show = "hold", out.width = "40%", echo = FALSE}
+```{r, figures-sode, fig.show = "hold", out.width = "35%", echo = FALSE}
 plot(density(biomark$voplus), main = "VO+")
 plot(density(biomark$vominus), main = "VO-")
 plot(density(biomark$oc), main = "OC")
@@ -33,49 +33,41 @@ sd_trap = sd(biomark$trap)
 
 Numerical summary for VO+:
 
-```{r}
+```{r, echo = FALSE}
 summary(biomark$voplus)
 ```
 
 $s_{VO+}=`r sd_vo_p`$
 
-\
 
 Numerical summary for VO-:
 
-```{r}
+```{r, echo = FALSE}
 summary(biomark$vominus)
 ```
 
 $s_{VO-}=`r sd_vo_m`$
 
-\
-
 Numerical summary for OC:
 
-```{r}
+```{r, echo = FALSE}
 summary(biomark$oc)
 ```
 
 $s_{OC}=`r sd_oc`$
 
-\
 
 Numerical summary for TRAP:
 
-```{r}
+```{r, echo = FALSE}
 summary(biomark$trap)
 ```
 
 $s_{TRAP}=`r sd_trap`$
 
-\
-
 Graphical summary for all and the distribution: **Right skewed.**
 
-\
-
-##### Problem 11.36b
+##### **Problem 11.36b**
 
 **Numerical summary:**
 
@@ -84,11 +76,9 @@ smallcs = subset(biomark, select = c("voplus", "vominus", "oc", "trap"))
 with(biomark, cor(smallcs))
 ```
 
-\
-
 **Graphical Summary:**
 
-```{r}
+```{r, echo = FALSE}
 pairs(smallcs, pch = ".")
 ```
 
@@ -96,7 +86,7 @@ pairs(smallcs, pch = ".")
 
 ### Problem 11.37
 ##### Problem 11.37a
-```{r}
+```{r, echo = FALSE, out.width = "40%"}
 fm1 = lm(voplus ~ oc, data = biomark)
 summary(fm1)
 
@@ -104,18 +94,22 @@ qqnorm(residuals.lm(fm1))
 abline(0,400)
 ```
 
+$VO+ = 334 + 19.51OC$
+
 **The plot of residuals against OC is sightly curved.**
 
 \
 
 ##### Problem 11.37b
 
-```{r}
+```{r, echo = FALSE}
 fm2 = lm(voplus ~ oc + trap, data = biomark)
 summary(fm2)
 ```
 
-**The view that TRAP is a better predictor of bone formation than OC is consistent with the results from 11.36 as the p-value for TRAP is signifiicantly lower than the p-value for OC.**
+$VO+ = 58 + 6.41OC + 53.9TRAP$
+
+**The view that TRAP is a better predictor of bone formation than OC is consistent with the results from 11.36 as the p-value for TRAP is significantly lower than the p-value for OC.**
 
 \
 
@@ -129,7 +123,7 @@ $y_{i} = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \beta_3x_{i1} + \epsilon_i$
 
 ##### Problem 11.38b
 
-```{r}
+```{r, echo = FALSE}
 fm3 = lm(voplus ~ oc + trap + vominus, data = biomark)
 summary(fm3)
 ```
@@ -161,7 +155,7 @@ SE = Standard Error
 
 *11.38b suggests that TRAP coefficient is not significant, so remove it.*
 
-```{r}
+```{r, echo = FALSE}
 fm4 = lm(voplus ~ oc + vominus, data = biomark)
 summary(fm4)
 ```
@@ -170,14 +164,59 @@ summary(fm4)
 
 ### Problem 11.39
 
-##### Problem 11.39a
-
 ```{r, echo = FALSE}
-smallcs = subset(biomark, select = c("lvoplus", "lvominus", "loc", "ltrap"))
-with(biomark, cor(smallcs))
+smallcs2 = subset(biomark, select = c("lvoplus", "lvominus", "loc", "ltrap"))
+head(with(biomark, cor(smallcs2)), 1)
 ```
 
-```{r}
-fm5 = lm(lvoplus ~ loc + ltrap + lvominus, data = biomark)
-summary(fm5)
+```{r, echo = FALSE, results = "asis", message = FALSE}
+fm5 = lm(lvoplus ~ loc, data = biomark)
+fm6 = lm(lvoplus ~ loc + ltrap, data = biomark)
+fm7 = lm(lvoplus ~ loc + ltrap + lvominus, data = biomark)
+fm8 = lm(lvoplus ~ loc + lvominus, data = biomark)
+library(stargazer)
+stargazer(fm5, fm6, fm7, fm8, align = TRUE, type = "html", report = ("vcpt*"), header = FALSE)
+
 ```
+
+\
+
+$LVO+ = 4.38 + 0.706LOC$
+
+$LVO+ = 4.26 + 0.430LOC + 0.424LTRAP$
+
+$LVO+ = 0.872 + 0.392LOC + 0.028LTRAP + 0.673LVO-$
+
+Model without LTRAP since it is insignificant (#4 in the table above):
+
+$LVO+ = 0.832 + 0.406LOC  + 0.682LVO-$
+
+### Problem 11.40
+
+**11.36:**
+```{r, echo = FALSE}
+smallcs3 = subset(biomark, select = c("vominus", "voplus", "oc", "trap"))
+head(with(biomark, cor(smallcs3)), 1)
+```
+
+(Graphs remain the same and other numerical summaries remain the same)
+
+**11.37: (#1 is Part A, #2 is Part B)**
+```{r, echo = FALSE, out.width = "40%", results = "asis"}
+fm9 = lm(vominus ~ oc, data = biomark)
+fm10 = lm(vominus ~ oc + trap, data = biomark)
+stargazer(fm9, fm10, align = TRUE, type = "html", report = ("vcpt*"), header = FALSE)
+
+qqnorm(residuals.lm(fm1))
+abline(5,300)
+```
+**The plot of residuals against OC is sightly curved again.**
+
+$VO- = 557.82 + 9.92OC$ (Part A)
+
+$VO- = 309.05 - 1.87OC + 48.5TRAP$ (Part B)
+
+**The view that TRAP is a better predictor of bone formation than OC is still consistent with the results from 11.36 as the p-value for TRAP is significantly lower than the p-value for OC.**
+
+
+
