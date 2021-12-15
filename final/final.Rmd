@@ -1,6 +1,6 @@
 ---
 title: "MA-331 Final"
-author: "Kevin Ha"
+author: "Kevin Ha, Connor Haaf, Ari Birnbaum"
 date: "12/14/2021"
 output: html_document
 ---
