@@ -201,6 +201,8 @@ head(with(biomark, cor(smallcs3)), 1)
 
 (Graphs remain the same and other numerical summaries remain the same)
 
+\
+
 **11.37: (#1 is Part A, #2 is Part B)**
 ```{r, echo = FALSE, out.width = "40%", results = "asis"}
 fm9 = lm(vominus ~ oc, data = biomark)
@@ -216,7 +218,7 @@ $VO- = 557.82 + 9.92OC$ (Part A)
 
 $VO- = 309.05 - 1.87OC + 48.5TRAP$ (Part B)
 
-**The view that TRAP is a better predictor of bone formation than OC is still consistent with the results from 11.36 as the p-value for TRAP is significantly lower than the p-value for OC.**
+\
 
 **11.38 (#1 is Part B, #2 is Part E)**
 ```{r, echo = FALSE, results = "asis"}
@@ -242,6 +244,8 @@ head(with(biomark, cor(smallcs4)), 1)
 
 (Graphs remain the same and other numerical summaries remain the same)
 
+\
+
 **11.37: (#1 is Part A, #2 is Part B)**
 ```{r, echo = FALSE, out.width = "40%", results = "asis"}
 fm13 = lm(lvominus ~ loc, data = biomark)
@@ -253,11 +257,11 @@ abline(5,300)
 ```
 **The plot of residuals against OC is sightly curved again.**
 
-$VO- = 5.21 + 0.44OC$ (Part A)
+$LVO- = 5.21 + 0.44LOC$ (Part A)
 
-$VO- = 5.04 - 0.06OC + 0.59TRAP$ (Part B)
+$LVO- = 5.04 - 0.06LOC + 0.59LTRAP$ (Part B)
 
-**The view that TRAP is a better predictor of bone formation than OC is still consistent with the results from 11.36 as the p-value for TRAP is significantly lower than the p-value for OC.**
+\
 
 **11.38 (#1 is Part B, #2 is Part E)**
 ```{r, echo = FALSE, results = "asis"}
