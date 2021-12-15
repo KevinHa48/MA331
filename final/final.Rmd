@@ -139,5 +139,45 @@ summary(fm3)
 ##### Problem 11.38c
 
 ![](table.png)
+EC = Estimated Coefficient
 
+SE = Standard Error
 
+**The coefficients and P-values differ significantly between all three tables.**
+
+\
+
+##### Problem 11.38d
+
+**11.37a:** Percent of variation is 43.51% (obtained from Multiple R-squared section in the summary) and the estimate of $\sigma = 443.3$
+
+**11.37b:** Percent of variation is 60.7% (obtained from Multiple R-squared section in the summary) and the estimate of $\sigma = 376.3$
+
+**11.38b:** Percent of variation is 88.44% (obtained from Multiple R-squared section in the summary) and the estimate of $\sigma = 207.8$
+
+\
+
+##### Problem 11.38e
+
+*11.38b suggests that TRAP coefficient is not significant, so remove it.*
+
+```{r}
+fm4 = lm(voplus ~ oc + vominus, data = biomark)
+summary(fm4)
+```
+
+**Better performance in terms of P-value compared to part B.**
+
+### Problem 11.39
+
+##### Problem 11.39a
+
+```{r, echo = FALSE}
+smallcs = subset(biomark, select = c("lvoplus", "lvominus", "loc", "ltrap"))
+with(biomark, cor(smallcs))
+```
+
+```{r}
+fm5 = lm(lvoplus ~ loc + ltrap + lvominus, data = biomark)
+summary(fm5)
+```
