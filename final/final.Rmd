@@ -218,5 +218,57 @@ $VO- = 309.05 - 1.87OC + 48.5TRAP$ (Part B)
 
 **The view that TRAP is a better predictor of bone formation than OC is still consistent with the results from 11.36 as the p-value for TRAP is significantly lower than the p-value for OC.**
 
+**11.38 (#1 is Part B, #2 is Part E)**
+```{r, echo = FALSE, results = "asis"}
+fm11 = lm(vominus ~ oc + trap + voplus, data = biomark)
+fm12 = lm(vominus ~ oc + voplus, data = biomark)
 
+stargazer(fm11, fm12, align = TRUE, type = "html", report = ("vcpt*"))
+```
 
+\
+
+$VO- = 267.26 - 6.51OC + 9.48TRAP + 0.72VO+$ (Part B)
+
+$VO- = 298.01 - 5.254OC + 0.78VO+$ (Part E)
+
+### Problem 11.41
+
+**11.36:**
+```{r, echo = FALSE}
+smallcs4 = subset(biomark, select = c("lvominus", "lvoplus", "loc", "ltrap"))
+head(with(biomark, cor(smallcs4)), 1)
+```
+
+(Graphs remain the same and other numerical summaries remain the same)
+
+**11.37: (#1 is Part A, #2 is Part B)**
+```{r, echo = FALSE, out.width = "40%", results = "asis"}
+fm13 = lm(lvominus ~ loc, data = biomark)
+fm14 = lm(lvominus ~ loc + ltrap, data = biomark)
+stargazer(fm13, fm14, align = TRUE, type = "html", report = ("vcpt*"), header = FALSE)
+
+qqnorm(residuals.lm(fm1))
+abline(5,300)
+```
+**The plot of residuals against OC is sightly curved again.**
+
+$VO- = 5.21 + 0.44OC$ (Part A)
+
+$VO- = 5.04 - 0.06OC + 0.59TRAP$ (Part B)
+
+**The view that TRAP is a better predictor of bone formation than OC is still consistent with the results from 11.36 as the p-value for TRAP is significantly lower than the p-value for OC.**
+
+**11.38 (#1 is Part B, #2 is Part E)**
+```{r, echo = FALSE, results = "asis"}
+fm15 = lm(lvominus ~ loc + ltrap + lvoplus, data = biomark)
+fm16 = lm(lvominus ~ loc + lvoplus, data = biomark)
+
+stargazer(fm15, fm16, align = TRUE, type = "html", report = ("vcpt*"))
+```
+
+\
+
+$LVO- = 1.57 - 0.29LOC + 0.25LTRAP + 0.81LVO+$ (Part B)
+
+$LVO- = 1.31 - 0.19LOC + 0.89LVO+$ (Part E)
