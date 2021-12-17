@@ -118,6 +118,11 @@ $VO+ = 58 + 6.41OC + 53.9TRAP$
 ##### Problem 11.38a
 
 $y_{i} = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \beta_3x_{i1} + \epsilon_i$ 
+\
+
+OR
+
+$VO+ = \beta_0 + \beta_1OC+ \beta_2TRAP + \beta_3VOMINUS + \epsilon_i$
 
 **Assumption:** $\epsilon_i$ is assumed to be independent and $N(0, \sigma$)
 
@@ -159,6 +164,8 @@ SE = Standard Error
 fm4 = lm(voplus ~ oc + vominus, data = biomark)
 summary(fm4)
 ```
+
+$VO+ = -234.14 + 9.40OC + 1.02VO-$ 
 
 **Better performance in terms of P-value compared to part B.**
 
@@ -209,7 +216,7 @@ fm9 = lm(vominus ~ oc, data = biomark)
 fm10 = lm(vominus ~ oc + trap, data = biomark)
 stargazer(fm9, fm10, align = TRUE, type = "html", report = ("vcpt*"), header = FALSE)
 
-qqnorm(residuals.lm(fm1))
+qqnorm(residuals.lm(fm9))
 abline(5,300)
 ```
 **The plot of residuals against OC is sightly curved again.**
@@ -232,7 +239,7 @@ stargazer(fm11, fm12, align = TRUE, type = "html", report = ("vcpt*"))
 
 $VO- = 267.26 - 6.51OC + 9.48TRAP + 0.72VO+$ (Part B)
 
-$VO- = 298.01 - 5.254OC + 0.78VO+$ (Part E)
+$VO- = 298.01 - 5.254OC + 0.78VO+$ (Part E)to me cause i dont 
 
 ### Problem 11.41
 
@@ -242,7 +249,56 @@ smallcs4 = subset(biomark, select = c("lvominus", "lvoplus", "loc", "ltrap"))
 head(with(biomark, cor(smallcs4)), 1)
 ```
 
-(Graphs remain the same and other numerical summaries remain the same)
+```{r, figures-e, fig.show = "hold", out.width = "35%", echo = FALSE}
+plot(density(biomark$lvoplus), main = "LVO+")
+plot(density(biomark$lvominus), main = "LVO-")
+plot(density(biomark$loc), main = "LOC")
+plot(density(biomark$ltrap), main = "LTRAP")
+```
+
+**Slight left skew when compared to the non-logarithmic versions of the graph**
+
+```{r, echo = FALSE}
+sd_lvo_p = sd(biomark$lvoplus)
+sd_lvo_m = sd(biomark$lvominus)
+sd_loc = sd(biomark$loc)
+sd_ltrap = sd(biomark$ltrap)
+```
+
+
+Numerical summary for LVO+:
+
+```{r, echo = FALSE}
+summary(biomark$lvoplus)
+```
+
+$s_{LVO+}=`r sd_lvo_p`$
+
+
+Numerical summary for LVO-:
+
+```{r, echo = FALSE}
+summary(biomark$lvominus)
+```
+
+$s_{LVO-}=`r sd_lvo_m`$
+
+Numerical summary for LOC:
+
+```{r, echo = FALSE}
+summary(biomark$loc)
+```
+
+$s_{LOC}=`r sd_loc`$
+
+
+Numerical summary for LTRAP:
+
+```{r, echo = FALSE}
+summary(biomark$ltrap)
+```
+
+$s_{LTRAP}=`r sd_ltrap`$
 
 \
 
@@ -252,8 +308,8 @@ fm13 = lm(lvominus ~ loc, data = biomark)
 fm14 = lm(lvominus ~ loc + ltrap, data = biomark)
 stargazer(fm13, fm14, align = TRUE, type = "html", report = ("vcpt*"), header = FALSE)
 
-qqnorm(residuals.lm(fm1))
-abline(5,300)
+qqnorm(residuals.lm(fm13))
+abline(0,0.4)
 ```
 **The plot of residuals against OC is sightly curved again.**
 
