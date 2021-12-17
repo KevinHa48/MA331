@@ -7,6 +7,80 @@ output: html_document
 
 ---
 
+# Final Project Write Up
+
+## Executive Summary
+
+The aim of this study is to look further into the interplay between two chemicals and their relation on bone growth and bone reduction. Specifically, we look at $OC$ and  $TRAP$ then assess their impact alone and together on $VO+$  and $VO-$. As such, we run a number of statistical analysis and predictive models on these data to try to further understand their interplay.
+
+## Study
+
+As already stated, this is a study of interactions between $OC$ and $TRAP$ on bone growth and reduction. This is done over 31 data points of the values of  $OC$, $TRAP$, bone growth ($VO+$) and reduction ($VO-$) for an individual. Additionally, due to some sort of skew or other imperfections in the given data, we perform these comparisons over the log of the data as well.
+
+## Software
+
+This analysis was written and produced using tools and libraries available through R, R Studio. R Markdown was used for producing LaTeX and graphical summaries.
+
+## Methodology
+
+In this study, we take in a set of 31 data points consisting of $VO+$, $VO-$, $OC$,  $LOC$, $TRAP$, $LTRAP$, $LVO+$, and $LVO-$ (where $L$ means log). Based on the data in this set, we assess, through regression models, the strength of association between the various data. Additionally, based on the  relations among the data types, we predict what changes we should see in one as we change another.
+
+For each such prediction, we consider the quality of the prediction using a $t$ test and potential skewness with $qq$ plot analysis. Using all of these tools, we build a prediction and run it both on the linearly reduced data and the logarithmically mapped data through a linear reduction.
+
+## Results and Analysis
+
+In our study, we found that all the data was mostly normally distributed. There were slight skews in each of the graphs. Additionally, we saw good coefficients of correlation between various members of the chemical set we were observing. Regardless of this, each of the linear regressions had a positive association with various strength correlations. Additionally, we ran the same statistical modeling on the data after logging it. This resulted in about a 10% increase in 
+
+## **Conclusion**
+
+In conclusion, after testing for the result of changing TRAP and or OC, we were able to conclude that there was indeed a significant correlation between bone formation and resorption with these changes. This change was a positive association, and the data set could have been larger to help work out the skew that we observed. In lieu of this, we took the log of the data to help normalize it and found that the correlation with OC increased by about 10%. Overall, we conclude that there is a correlation between this formation and resorption, and this would likely be better represented with a larger sample.
+
+### 11.37
+
+**a.**
+
+The plot of the residuals has a slight concave curve down when compared with the line of best fit.
+
+**b.**
+
+$TRAP_p=0.00158\lt OC_p=0.22102$. Since $TRAP$'s $p$-value is significantly lower than $OC$'s, $TRAP$ acts as a better predictor of bone formation, $VO+$.
+
+This view is consistent with that of 11.36, since $TRAP$ had a smaller standard deviation of $6.5282397$ when compared with $OC$'s $19.6097441$. Thus, $TRAP$'s volatility was lower, meaning more consistent results.
+
+### **11.38**
+
+Based on the above table, the standard deviation for the estimated coefficients of the intercept, $OC$, and $TRAP$ are respectively $288.8035, 7.0965,\text{and } 24.4286$. While $OC$'s is the smallest, the intercept and $TRAP$'s coefficient prove to be very volatile between the three tables.
+
+The same volatility is apparent in the $p$-values of the data set as well. Specifically, note the incredibly small $p$-values of 11.38's $VO-$ and 11.37.a's $OC$.
+
+### **11.39**
+
+Given that the data is skewed right, the logarithmic data set is more normalized. When we have a reduced skew, we're modeling an increased input set. Meaning, our model becomes more predictive and the correlation values are higher.
+
+### 11.40
+
+**For 11.37**
+
+**a.**
+
+The plot of the residuals again has a slight concave curve down when compared with the line of best fit.
+
+**b.**
+
+$TRAP_p=0.291\gt OC_p=0.016$. Since $TRAP$'s $p$-value is significantly greater than $OC$'s, $OC$ acts as a better predictor of bone formation, $VO+$.
+
+This view is consistent with that of 11.36, since $OC$ had a smaller standard deviation of $6.5282397$ when compared with $OC$'s $19.6097441$. Thus, $TRAP$'s volatility was lower, meaning more consistent results.
+
+**For** **11.38**
+
+**c.**
+
+Based on the above table, the estimated coefficients for the intercept, $OC$, and $TRAP$ are far more stable when $VO+$ and $VO-$ are revered.
+
+The same is apparent for the $p$-values of the data set as well.
+
+---
+
 ```{r, echo = FALSE}
 library(readxl)
 biomark <- read_excel("Biomark.xls")
@@ -137,7 +211,7 @@ summary(fm3)
 
 ##### Problem 11.38c
 
-![](table.png)
+![](https://i.imgur.com/AK9S0cG.png)
 EC = Estimated Coefficient
 
 SE = Standard Error
